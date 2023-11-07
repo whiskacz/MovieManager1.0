@@ -1,0 +1,28 @@
+:root{
+  --myColor1: #ebebeb;
+  --myColor2: #c0c0c0;
+  --myColor3: #3A6EA5;
+  --myColor4: #004E98;
+  --myColor5: #FF6700;
+}
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.backgroundWrapper {
+  width: 100%;
+  height: 100vh;
+  background: var(--myColor3);
+}
+li {
+  list-style: none;
+}
+
+li > *  {
+  color: var(--myColor1);
+  width:;
+}
