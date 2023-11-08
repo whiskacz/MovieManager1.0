@@ -14,15 +14,39 @@
 }
 
 .backgroundWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100vh;
   background: var(--myColor3);
+  overflow: hidden;
 }
 li {
   list-style: none;
+  position: absolute;
+  bottom : -300px;
 }
 
 li > *  {
   color: var(--myColor1);
-  width:;
+  display: block;
+  animation: animate 30s linear infinite;
+  
+}
+
+
+@keyframes animate {
+
+  0%{
+      transform: translateY(0) rotate(0deg);
+      border-radius: 0;
+  }
+
+  100%{
+      transform: translateY(-1000px) rotate(720deg);
+      border-radius: 50%;
+      opacity: 0;
+  }
+
 }
