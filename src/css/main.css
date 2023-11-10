@@ -62,12 +62,35 @@ li > *  {
 }
 
 .choiceContainer{
-  background-color: white;
   width: 200px;
-  height: 100px;
-  display: flexbox;
+  height: 70px;
+  display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
+}
+.choiceTitle{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.choiceNavbar{
+  width: 50%;
+  position: relative;  
+  cursor: pointer;
+}
+.bar{
+  height: 20px;
+  border-radius: 999px;
+  background-color: var(--myColor4);
+}
+
+.choiceTitle p{
+  color: white;
+  font-size: 1.5rem;
 }
 
 .loginPageBox{
