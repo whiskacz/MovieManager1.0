@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { BsFillArrowUpLeftCircleFill } from "react-icons/bs";
+import { MdEmail, MdLockOutline, MdAccountCircle } from "react-icons/md";
 
 export const LoginPage = () => {
 
-    const [position, setPosition] = useState<number>(-50);
+    const [position, setPosition] = useState<number>(-40);
     const [rotation, setRotation] = useState<number>(0);
 
     const handleTogglePosition = () => {
-        const newPosition: number = position === -50 ? 200 : -50;
+        const newPosition: number = position === -40 ? 180 : -40;
         const newRotation: number = rotation === 0 ? 90 : 0;
     
         setPosition(newPosition);
@@ -16,7 +17,7 @@ export const LoginPage = () => {
 
   return (
 
-    <main className='loginPageWrapper'>
+    <main className='loginPageWrapper flexColumnCenter'>
         <div className='choiceContainer'>
             <div className='choiceTitle'>
                 <p>Log In</p>
@@ -38,6 +39,50 @@ export const LoginPage = () => {
         </div>
 
         <div className='loginPageBox'>
+            <div className={`relativeBox ${position === -40 ? '' : 'hidden'}`}>
+                <span>Log In</span>
+                <div className='inputContainer flexColumnCenter'>
+                    <div className='inputBox'>
+                        <MdEmail style={{width:'2rem', height:'2rem'}} />
+                        <input type='text' placeholder='Email' />
+                    </div>
+                    <div className='inputBox'>
+                        <MdLockOutline style={{width:'2rem', height:'2rem'}} />
+                    <input type='password' placeholder='Password' />
+                    </div>
+                </div>
+                <div className='buttonContainer flexColumnCenter'>
+                    <button>
+                        Login
+                    </button>
+                    <span>
+                        Forgot your password?
+                    </span>
+                </div>
+
+            </div>
+           
+            <div className={`relativeBox ${position === -40 ? 'hidden' : ''}`}>
+                <span>Sign Up</span>
+                <div className='inputContainer flexColumnCenter'>
+                    <div className='inputBox'>
+                        <MdAccountCircle style={{width:'2rem', height:'2rem'}} />
+                        <input type='text' placeholder='Full Name' />
+                    </div>
+                    <div className='inputBox'>
+                        <MdEmail style={{width:'2rem', height:'2rem'}} />
+                        <input type='text' placeholder='Email' />
+                    </div>
+                    <div className='inputBox'>
+                        <MdLockOutline style={{width:'2rem', height:'2rem'}} />
+                        <input type='password' placeholder='Password' />
+                    </div>
+                </div>
+                <button>
+                    Register
+                </button>
+            </div>
+
         </div>    
     </main>
   )
