@@ -1,7 +1,7 @@
 import React from 'react'
 
-export const manager = () => {
+export const Manager = () => {
   return (
-    <div>manager</div>
+    
   )
 }

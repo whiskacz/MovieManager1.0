@@ -218,6 +218,3 @@ input::placeholder{
   }
 }
 
-.hidden {
-  transform: translateX(500px);
-}

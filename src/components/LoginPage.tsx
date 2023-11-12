@@ -37,9 +37,9 @@ export const LoginPage = () => {
                 }}/>
             </div>
         </div>
-
         <div className='loginPageBox'>
-            <div className={`relativeBox ${position === -40 ? '' : 'hidden'}`}>
+            {position === -40 ? 
+            <div className='relativeBox'>
                 <span>Log In</span>
                 <div className='inputContainer flexColumnCenter'>
                     <div className='inputBox'>
@@ -61,8 +61,8 @@ export const LoginPage = () => {
                 </div>
 
             </div>
-           
-            <div className={`relativeBox ${position === -40 ? 'hidden' : ''}`}>
+            :
+            <div className='relativeBox'>
                 <span>Sign Up</span>
                 <div className='inputContainer flexColumnCenter'>
                     <div className='inputBox'>
@@ -82,7 +82,7 @@ export const LoginPage = () => {
                     Register
                 </button>
             </div>
-
+            }
         </div>    
     </main>
   )
