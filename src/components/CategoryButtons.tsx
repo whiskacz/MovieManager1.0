@@ -12,9 +12,9 @@ const CategoryButtons = () => {
 
   return (
     <div className='mainCategoryButtons'>
-    {categoryButtons.map((element) => {
+    {categoryButtons.map((element,index) => {
         return (
-        <button>{element}</button>
+        <button key={index}>{element}</button>
 )})}
     </div>
   )
