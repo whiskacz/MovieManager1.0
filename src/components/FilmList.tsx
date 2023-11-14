@@ -1,19 +1,23 @@
-import React from 'react'
+import React from 'react';
+import { useSpring, animated } from 'react-spring';
 
 const FilmList = () => {
+    const props = useSpring({
+        opacity: 1,
+        transform: 'translateX(0)',
+        from: { opacity: 0, transform: 'translateX(-100%)' },
+        delay: 1500, 
+      });
+
   return (
-    <main className='mainFilmListContainer'>
+    <animated.main className='mainFilmListContainer' style={props}>
         <span className='flexColumnCenter'>
             <div>Choose your list</div>
             <div>or find something new!</div>
         </span>
-        {/* <div className='spinnerLoader'>
-            <div className='spin one'></div>
-            <div className='spin two'></div>
-            <div className='spin three'></div>
-        </div> */}
         
-    </main>
+        
+    </animated.main>
   )
 }
 
