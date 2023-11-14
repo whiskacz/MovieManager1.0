@@ -9,8 +9,8 @@ const Manager: React.FC = () => {
   return (
     <main className='mainManagerContainer'>
       <NavBar />
-      <CategoryButtons />
       <SearchBar />
+      <CategoryButtons />
       <FilmList />
     </main>
   )

@@ -187,11 +187,29 @@ input::placeholder{
 }
 
 .filmInputSearchBar {
-  flex: 0 0 auto;
-  margin: 2vh auto;
-  width: 50vw;
-  position: relative;
   
+ 
+  width: 50vw;
+  position: relative; 
+}
+
+.searchBarContainer{
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.searchBarContainer img{
+  width: 25vw;
+}
+
+.filmInputSearchBar::before{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .filmInputSearchBar input {

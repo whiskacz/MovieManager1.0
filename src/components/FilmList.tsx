@@ -7,11 +7,11 @@ const FilmList = () => {
             <div>Choose your list</div>
             <div>or find something new!</div>
         </span>
-        <div className='spinnerLoader'>
+        {/* <div className='spinnerLoader'>
             <div className='spin one'></div>
             <div className='spin two'></div>
             <div className='spin three'></div>
-        </div>
+        </div> */}
         
     </main>
   )
