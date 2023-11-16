@@ -7,7 +7,7 @@ export const App: React.FC = () => {
     <Router>
         <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/' element={<Manager />} />
+            <Route path='/manager' element={<Manager />} />
         </Routes>
     </Router>
   )
