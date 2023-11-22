@@ -5,6 +5,8 @@
   --myColor4: #004E98;
   --myColor5: #FF6700;
   --myColor6: #212529;
+  --myColor7: #009688;
+  --myColor8: #E53935;
 
 }
 
@@ -106,6 +108,15 @@ li > *  {
   gap:.5rem; 
 }
 
+.infoValidation{
+  width: 70%;
+  padding: 10px;
+  background-color: var(--myColor6);
+  color: var(--myColor1);
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
 .relativeBox{
   width: 100%;
   height: 100%;
@@ -123,6 +134,7 @@ li > *  {
 .relativeBox > span {
   font-size: 2.5rem;
   font-weight: 700;
+  color: var(--myColor4);
 }
 
 .relativeBox button {
@@ -135,9 +147,7 @@ li > *  {
   cursor: pointer;
 }
 
-.relativeBox *{
-  color: var(--myColor4);
-}
+
 
 .loginPageBox input {
   border: none;
@@ -154,14 +164,23 @@ input::placeholder{
 .inputBox{
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  background-color: var(--myColor2);
-  width: 80%;
+  justify-content: center; 
+  width: 70%;
   height: 2.5rem;
-  border-radius: 5px;
+  
 }
 .inputBox *{
   padding-left: 10px;
+  
+}
+.inputBoxPlaceHolder {
+  position: relative;
+  background-color: var(--myColor2);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   color: var(--myColor4);
 }
 
@@ -316,6 +335,27 @@ input::placeholder{
 .mainFilmListContainer > span div{
   font-family: 'Anton', sans-serif;
 }
+
+.checkTrue {
+  position: absolute;
+  right: 20px;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--myColor7);
+}
+.checkFalse {
+  position: absolute;
+  right: 20px;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--myColor8);
+}
+
+
+.checkHidden {
+  display: none;
+}
+
 
 @keyframes animateBackground {
 

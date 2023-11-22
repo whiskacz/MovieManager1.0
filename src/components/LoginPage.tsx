@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { BsFillArrowUpLeftCircleFill } from "react-icons/bs";
+import { BsFillArrowUpLeftCircleFill, BsCheckCircleFill, BsXCircleFill } from "react-icons/bs";
 import { MdEmail, MdLockOutline, MdAccountCircle } from "react-icons/md";
 
 export const LoginPage = () => {
@@ -21,13 +21,15 @@ export const LoginPage = () => {
         password: string,
         email: string,
         userFocus: boolean,
-        passwordFocus: boolean
+        passwordFocus: boolean,
+        emailFocus: boolean
     }>({
         user: '',
         password: '',
         email: '',
         userFocus: false,
-        passwordFocus: false
+        passwordFocus: false,
+        emailFocus: false
     })
     
     const [position, setPosition] = useState<string>('sign');
@@ -35,6 +37,8 @@ export const LoginPage = () => {
     
     const USER_REGEX = /^[A-z][A-z0-9-_]{5,15}$/;
     const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{10,20}$/;
+    const EMAIL_REGEX = /^(?=.*[@])[A-Za-z]{5,15}$/
+    
     
     let iconPosition: number 
     position === "sign" ?  iconPosition = -40 : iconPosition = 180
@@ -74,24 +78,33 @@ export const LoginPage = () => {
                 <span>Log In</span>
                 <div className='inputContainer flexColumnCenter'>
                     <div className='inputBox'>
-                        <MdEmail style={{width:'2rem', height:'2rem'}} />
-                        <input 
-                        type='text' 
-                        placeholder='User'
-                        value={logInData.user}
-                        onChange={(e)=>setLogInData(prevState => ({...prevState, user: e.target.value}))}
-                        onFocus={(event) => {setLogInData(prevState => ({...prevState, userFocus : true}))}}  
+                        <div className="inputBoxPlaceHolder">
+                            <MdAccountCircle style={{width:'2rem', height:'2rem'}} />
+                            <input 
+                            type='text' 
+                            placeholder='User'
+                            value={logInData.user}
+                            onChange={(e)=>setLogInData(prevState => ({...prevState, user: e.target.value}))}
+                            onFocus={(event) => {setLogInData(prevState => ({...prevState, userFocus : true}))}}  
                         />
+                        </div>
+                        <BsCheckCircleFill className={logInData.user ? "checkTrue" : "checkHidden"} />
                     </div>
+                    <span className="infoValidation">
+                        5 to 15 characters. Must begin with a letter.<br />
+                        Letters, numbers, underscores, hyphens allowed.
+                    </span>
                     <div className='inputBox'>
-                        <MdLockOutline style={{width:'2rem', height:'2rem'}} />
-                    <input 
-                    type='password' 
-                    placeholder='Password'
-                    value={logInData.password}
-                    onChange={(e)=>setLogInData(prevState => ({...prevState, password: e.target.value}))} 
-                    onFocus={(event) => {setLogInData(prevState => ({...prevState, userPassword : true}))}} 
-                    />
+                        <div className="inputBoxPlaceHolder">
+                            <MdLockOutline style={{width:'2rem', height:'2rem'}} />
+                            <input 
+                            type='password' 
+                            placeholder='Password'
+                            value={logInData.password}
+                            onChange={(e)=>setLogInData(prevState => ({...prevState, password: e.target.value}))} 
+                            onFocus={(event) => {setLogInData(prevState => ({...prevState, passwordFocus : true}))}} 
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className='buttonContainer flexColumnCenter'>
@@ -109,16 +122,40 @@ export const LoginPage = () => {
                 <span>Sign Up</span>
                 <div className='inputContainer flexColumnCenter'>
                     <div className='inputBox'>
-                        <MdAccountCircle style={{width:'2rem', height:'2rem'}} />
-                        <input type='text' placeholder='Full Name' />
+                        <div className="inputBoxPlaceHolder">
+                            <MdAccountCircle style={{width:'2rem', height:'2rem'}} />
+                            <input 
+                            type='text' 
+                            placeholder='Full Name'
+                            value={signUpData.user}
+                            onChange={(e)=>setSignUpData(prevState => ({...prevState, user:e.target.value}))}
+                            onFocus={(event) => {setSignUpData(prevState => ({...prevState, userFocus : true}))}} 
+                            />
+                        </div>
                     </div>
                     <div className='inputBox'>
-                        <MdEmail style={{width:'2rem', height:'2rem'}} />
-                        <input type='text' placeholder='Email' />
+                        <div className="inputBoxPlaceHolder">
+                            <MdEmail style={{width:'2rem', height:'2rem'}} />
+                            <input 
+                            type='text' 
+                            placeholder='Email'
+                            value={signUpData.email}
+                            onChange={(e)=>setSignUpData(prevState => ({...prevState, email:e.target.value}))}
+                            onFocus={(event) => {setSignUpData(prevState => ({...prevState, emailFocus : true}))}} 
+                            />
+                        </div>
                     </div>
                     <div className='inputBox'>
-                        <MdLockOutline style={{width:'2rem', height:'2rem'}} />
-                        <input type='password' placeholder='Password' />
+                        <div className="inputBoxPlaceHolder">
+                            <MdLockOutline style={{width:'2rem', height:'2rem'}} />
+                            <input 
+                            type='password' 
+                            placeholder='Password'
+                            value={signUpData.password}
+                            onChange={(e)=>setSignUpData(prevState => ({...prevState, password:e.target.value}))}
+                            onFocus={(event) => {setSignUpData(prevState => ({...prevState, passwordFocus : true}))}} 
+                            />
+                        </div>
                     </div>
                 </div>
                 <button>
