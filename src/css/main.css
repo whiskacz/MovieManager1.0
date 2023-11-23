@@ -96,7 +96,7 @@ li > *  {
 
 .loginPageBox{
   width: 30vw;
-  height: 40vh;
+  height: 50vh;
   background-color: var(--myColor1);
   display: flex;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 1);
@@ -110,6 +110,7 @@ li > *  {
 
 .infoValidation{
   width: 70%;
+  margin-top: -10px;
   padding: 10px;
   background-color: var(--myColor6);
   color: var(--myColor1);
@@ -150,15 +151,18 @@ li > *  {
 
 
 .loginPageBox input {
+  height: 2rem;
   border: none;
   background-color: transparent;
   color: var(--myColor4);
   width: 100%;
   outline: none;
+  margin: auto;
+  font-size: 1.2rem;
 }
 
 input::placeholder{
-  color: var(--myColor4)
+  color: var(--myColor4); 
 }
 
 .inputBox{
@@ -166,7 +170,7 @@ input::placeholder{
   align-items: center;
   justify-content: center; 
   width: 70%;
-  height: 2.5rem;
+  height: 3rem;
   
 }
 .inputBox *{
@@ -182,6 +186,7 @@ input::placeholder{
   align-items: center;
   width: 100%;
   color: var(--myColor4);
+  height: 2rem;
 }
 
 .flexColumnCenter{
@@ -338,16 +343,16 @@ input::placeholder{
 
 .checkTrue {
   position: absolute;
-  right: 20px;
-  width: 2.5rem;
-  height: 2.5rem;
+  right: 25px;
+  width: 3rem;
+  height: 3rem;
   color: var(--myColor7);
 }
 .checkFalse {
   position: absolute;
-  right: 20px;
-  width: 2.5rem;
-  height: 2.5rem;
+  right: 25px;
+  width: 3rem;
+  height: 3rem;
   color: var(--myColor8);
 }
 
