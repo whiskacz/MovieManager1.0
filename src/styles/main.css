@@ -286,19 +286,27 @@ input::placeholder{
 }
 
 .mainCategoryButtons {
+  
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
-  background-color: var(--myColor1);
+  background-color: ;
   gap: 2vw;
-  max-width: 1500px;
+  opacity: 0;
+ 
+  
 }
 
 .mainCategoryButtons > a > img{
   width: 20vw;
   margin-left: 2vw;
+  padding: 8px 20px;
+  border-radius: 5px;
+  border: 2px solid var(--myColor3);
+  border: 3px solid var(--myColor4);
+  background-color: var(--myColor1) ;
 }
 
 .mainCategoryButtons button{
@@ -308,7 +316,7 @@ input::placeholder{
   color: var(--myColor4);
   cursor: pointer;
   text-transform: uppercase;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   border: 3px solid var(--myColor4);
   margin: 2vh auto;
@@ -361,6 +369,31 @@ input::placeholder{
   display: none;
 }
 
+.backgroundComponent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.backgroundImage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 8s ease-in-out;
+}
+
+.backgroundImage.visible {
+  opacity: 0.3;
+  animation: zoomEffect 100s  infinite; 
+  
+}
+
 
 @keyframes animateBackground {
 
@@ -401,4 +434,17 @@ input::placeholder{
     transform: rotate(180deg);
   }
 }
+
+
+
+
+@keyframes zoomEffect {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(2);
+  }
+}
+
 

@@ -163,7 +163,7 @@ export const LoginPage = () => {
                     </span> : null }
                 </div>
                 <div className='buttonContainer flexColumnCenter'>
-                    <button>
+                    <button disabled={validationLogIn.user || validationLogIn.password ? false : true}>
                         Login
                     </button>
                     {/* <span>
@@ -230,7 +230,7 @@ export const LoginPage = () => {
                         Minimum 5 characters.Must include: @ 
                     </span> : null }
                 </div>
-                <button>
+                <button disabled={validationSignUp.user || validationSignUp.password || validationSignUp.email ? false : true}>
                     Register
                 </button>
             </div>

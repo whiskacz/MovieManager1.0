@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { GiFilmStrip } from "react-icons/gi";
 import { LoginPage } from '../components/LoginPage';
-import '../css/main.css';
+import '../styles/main.css';
 
 
 export const Home = () => {
