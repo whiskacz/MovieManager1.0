@@ -45,7 +45,7 @@ li > *  {
   left: 50%;
   user-select: none;
   transform: translate(-50%,-50%);
-  animation: animateTitle 3s linear;
+  animation: animateTitle 1.5s linear;
 }
 .mainTitle * {
   font-size: 10vh;
@@ -292,7 +292,6 @@ input::placeholder{
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
-  background-color: ;
   gap: 2vw;
   opacity: 0;
  

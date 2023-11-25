@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Provider } from 'react-redux/es/exports';
+import store from '../store/store';
 import NavBar from '../components/NavBar'
 import CategoryButtons from '../components/CategoryButtons'
 import FilmList from '../components/FilmList'
@@ -24,7 +26,6 @@ const Manager: React.FC = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      // Losowanie indeksu obrazu po 1 sekundzie i co 8 sekund
       const randomIndex = Math.floor(Math.random() * backgroundImages.length);
       setCurrentImageIndex(randomIndex);
     }, 1000);
@@ -39,10 +40,10 @@ const Manager: React.FC = () => {
       for (let i = 0; i < elements.length; i++) {
         const randomOriginX = Math.random() * 100;
         const randomOriginY = Math.random() * 100;
-        const randomScale = 1 + Math.random(); // Losowa wartość skali z zakresu 1 do 2
+        const randomScale = 1 + Math.random();
 
         elements[i].style.transformOrigin = `${randomOriginX}% ${randomOriginY}%`;
-        elements[i].style.animationDuration = `${10 + Math.random() * 20}s`; // Losowa długość animacji
+        elements[i].style.animationDuration = `${10 + Math.random() * 20}s`;
         elements[i].style.transform = `scale(${randomScale})`;
       }
     };
@@ -52,19 +53,21 @@ const Manager: React.FC = () => {
   
   return (
     <>
-    <div className="backgroundComponent mainManagerContainer">
-      {backgroundImages.map((image, index) => (
-        <img
-          key={index}
-          className={`backgroundImage ${index === currentImageIndex ? 'visible' : ''}`}
-          src={image}
-          alt={`Background ${index}`}
-        />
-      ))}
-      <NavBar />
-      <CategoryButtons />
-      <FilmList />
-    </div>
+      <Provider store={store}>
+        <div className="backgroundComponent mainManagerContainer">
+          {backgroundImages.map((image, index) => (
+            <img
+              key={index}
+              className={`backgroundImage ${index === currentImageIndex ? 'visible' : ''}`}
+              src={image}
+              alt={`Background ${index}`}
+            />
+          ))}
+          <NavBar />
+          <CategoryButtons />
+          <FilmList />
+        </div>
+      </Provider>
     </>
   )
 }

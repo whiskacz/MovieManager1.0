@@ -1,23 +1,49 @@
 import React from 'react'
-import tmdbLogo from '../images/tmdbLogo.svg';
+import { useDispatch } from 'react-redux';
 import { useSpring, animated } from 'react-spring';
+import { setButtonSelection } from '../store/actions';
+import tmdbLogo from '../images/tmdbLogo.svg';
+
 
 const CategoryButtons = () => {
 
-    const props = useSpring({
-        opacity: 1,
-        transform: 'translateX(0)',
-        from: { opacity: 0, transform: 'translateX(-100%)' },
-        delay: 1000, 
-      });
+  const dispatch = useDispatch();
 
-    const categoryButtons = [
-        'private',
-        'now playing',
-        'popular',
-        'top rated',
-        'upcoming'
-    ]
+  const handleButtonClick = (buttonName: string) => {
+
+    let selectedButton = '' 
+
+    // Sprawdzanie nazwy klikniętego przycisku i przypisanie odpowiedniej nazwy
+    if (buttonName === 'now playing') {
+      selectedButton = 'now_playing';
+    } else if (buttonName === 'top rated') {
+      selectedButton = 'top_rated';  
+    } else if (buttonName === 'popular') {
+      selectedButton = 'popular';
+    } else if (buttonName === 'upcoming') {
+      selectedButton = 'upcoming';  
+    } else {
+      selectedButton = buttonName;
+    }
+
+
+    dispatch(setButtonSelection(selectedButton));
+  };
+
+  const props = useSpring({
+      opacity: 1,
+      transform: 'translateX(0)',
+      from: { opacity: 0, transform: 'translateX(-100%)' },
+      delay: 1000, 
+    });
+
+  const categoryButtons = [
+      'private',
+      'now playing',
+      'popular',
+      'top rated',
+      'upcoming'
+  ]
 
   return (
     <animated.div className='mainCategoryButtons' style={props}>
@@ -26,7 +52,7 @@ const CategoryButtons = () => {
         </a>
         {categoryButtons.map((element,index) => {
         return (
-        <button key={index}>{element}</button>
+        <button key={index} onClick={() => handleButtonClick(element)}>{element}</button>
         )})}
     </animated.div>
   )
