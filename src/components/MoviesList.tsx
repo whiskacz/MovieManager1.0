@@ -4,8 +4,9 @@ import axios from 'axios';
 import { MovieData } from '../interfaces/interface';
 import { useSelector } from 'react-redux';
 import { StateMovieSection } from '../interfaces/interface';
+import SingleMovie from './SingleMovie';
 
-const FilmList = () => {
+const MoviesList = () => {
   
   const [movieData, setMovieData] = useState<MovieData[]>([]);  
   const selectedButton = useSelector((state: StateMovieSection) => state.selectedMovieSection);
@@ -25,7 +26,7 @@ const FilmList = () => {
           const language = 'pl';
           const apiUrl = `https://api.themoviedb.org/3/movie/${selectedButton}?language=pl&page=1`; // Zastąp "endpoint" właściwym adresem URL końcowym API TMDb
 
-          const response = await axios.get<MovieData>(apiUrl, {
+          const response = await axios.get(apiUrl, {
             params: {
               api_key: apiKey,
               language: language,
@@ -33,8 +34,8 @@ const FilmList = () => {
             },
           });
 
-          const data = response.data;
-          setMovieData([data])
+          const data = response.data.results
+          setMovieData(data)
           // Tutaj możesz przetwarzać dane z odpowiedzi API
           
          //console.log(data);
@@ -49,20 +50,23 @@ const FilmList = () => {
 
 
   return (
-    <animated.main className='mainFilmListContainer' style={props}>
+    <animated.main className='mainMoviesListContainer' style={props}>
+        {movieData.length === 0 ?
         <span className='flexColumnCenter'>
             <div>Choose your list</div>
             <div>or find something new!</div>
-            <p>Wybrany przycisk: {selectedButton}</p>
-            {movieData.map((element) => {
-              return (
-              <div></div>
-            )})}
-        </span>
+            <p>Wybrany przycisk: {selectedButton}</p>        
+        </span> :
         
+                movieData.map((element) => (
+                  <SingleMovie key={element.id} data={element} />
+                ))
+               
+              
+            }
         
     </animated.main>
   )
 }
 
-export default FilmList
+export default MoviesList

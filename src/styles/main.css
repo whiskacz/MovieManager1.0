@@ -253,7 +253,7 @@ input::placeholder{
   flex-shrink: 0;
 }
 
-.filmList {
+.moviesList {
   background-color: var(--myColor4);
   flex: 1;
   width: 100%;
@@ -328,7 +328,7 @@ input::placeholder{
  background-color: #fff;
 }
 
-.mainFilmListContainer {
+.mainMoviesListContainer {
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -337,14 +337,14 @@ input::placeholder{
   width: 100%;
   height: 100%;
 }
-.mainFilmListContainer > span{
+.mainMoviesListContainer > span{
   color: var(--myColor4);
   font-size: 4rem;
   user-select: none;
   font-family: 'Anton', sans-serif;
 }
 
-.mainFilmListContainer > span div{
+.mainMoviesListContainer > span div{
   font-family: 'Anton', sans-serif;
 }
 

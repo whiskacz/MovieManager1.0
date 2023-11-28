@@ -3,7 +3,7 @@ import { Provider } from 'react-redux/es/exports';
 import store from '../store/store';
 import NavBar from '../components/NavBar'
 import CategoryButtons from '../components/CategoryButtons'
-import FilmList from '../components/FilmList'
+import MoviesList from '../components/MoviesList'
 import backgroundImage1 from '../images/img1.jpg'; // Importuj wszystkie obrazy z folderu images
 import backgroundImage2 from '../images/img2.jpg';
 import backgroundImage3 from '../images/img3.jpg';
@@ -65,7 +65,7 @@ const Manager: React.FC = () => {
           ))}
           <NavBar />
           <CategoryButtons />
-          <FilmList />
+          <MoviesList />
         </div>
       </Provider>
     </>

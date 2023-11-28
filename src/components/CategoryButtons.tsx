@@ -13,7 +13,6 @@ const CategoryButtons = () => {
 
     let selectedButton = '' 
 
-    // Sprawdzanie nazwy klikniętego przycisku i przypisanie odpowiedniej nazwy
     if (buttonName === 'now playing') {
       selectedButton = 'now_playing';
     } else if (buttonName === 'top rated') {

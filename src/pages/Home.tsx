@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { GiFilmStrip } from "react-icons/gi";
 import { LoginPage } from '../components/LoginPage';
 import '../styles/main.css';
-import SingleMovie from '../components/SingleMovie';
 
 
 export const Home = () => {
@@ -35,7 +34,6 @@ export const Home = () => {
         <p>click to start</p>
       </div>
       } */}
-      <SingleMovie />
     </>
   )
 }

@@ -8,7 +8,13 @@ export interface SetSelectedButtonAction {
 export type ActionTypes = SetSelectedButtonAction;
 
 export interface MovieData {
-  // Interfejs dla danych filmowych
+    id: number;
+    original_title: string;
+    popularity: number;
+    vote_average: number;
+    backdrop_path: string;
+    poster_path: string;
+  
 }
 
 export interface StateMovieSection {
