@@ -10,7 +10,8 @@ const SingleMovie: React.FC<{data: MovieData }> = ({ data  }) => {
     poster_path,
 } = data
 return (
-    <main className="singleMovieContainer">
+    <main className="flex flex-col w-20vw h-30vh rounded-md overflow-hidden">
+        <img src={`https://image.tmdb.org/t/p/original${poster_path}`} alt="movie poster" className="w-full h-full object-cover rounded-md"/>
         <div>{original_title}</div>
     </main>
 )

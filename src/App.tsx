@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './index.css'
 import Home from './pages/Home';
 import Manager from './pages/Manager';
+
 
 export const App: React.FC = () => {
   return (
