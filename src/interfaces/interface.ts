@@ -9,12 +9,11 @@ export type ActionTypes = SetSelectedButtonAction;
 
 export interface MovieData {
     id: number;
-    original_title: string;
+    title: string;
     popularity: number;
     vote_average: number;
-    backdrop_path: string;
     poster_path: string;
-  
+    vote_count: number;
 }
 
 export interface StateMovieSection {

@@ -15,6 +15,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
 }
 
 .backgroundWrapper {
@@ -205,11 +206,13 @@ input::placeholder{
 .mainManagerContainer {
   width: 100vw;
   min-height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   background-color: var(--myColor1);
+  background-color: rgba(0, 0, 0, 0.3)
 }
 
 .filmInputSearchBar {
@@ -261,6 +264,7 @@ input::placeholder{
 
 .mainNavbar {
   width: 100%;
+  overflow: hidden;
   height: 8vw;
   display: flex;
   background-color: var(--myColor3);
@@ -331,11 +335,11 @@ input::placeholder{
 .mainMoviesListContainer {
   overflow: hidden;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 100%;
 }
 .mainMoviesListContainer > span{
   color: var(--myColor4);
@@ -372,7 +376,7 @@ input::placeholder{
   top: 0;
   left: 0;
   width: 100%;
- 
+  height:100%;
   overflow: hidden;
   z-index: -1;
 }
@@ -394,6 +398,72 @@ input::placeholder{
   
 }
 
+.singleMovieContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  margin: 2vw;
+  width: 20rem;
+  min-height: 70vh;
+  border: 2px solic var(--myColor3);
+  box-shadow: 0px 0px 10px 0px rgba(58, 110, 165, 1);
+  background-color: var(--myColor1);
+  color: var(--myColor4);
+  font-weight: 700;
+  padding: 5px;
+}
+
+.singleMovieContainer > img {
+  width: 100%;
+  max-height: 70%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+
+.singleMovieContainer > :nth-child(2) {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+.singleMovieInfo {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.voteCircle{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5rem;
+  height: 5rem;
+  color: var(--myColor4);
+  border-radius: 9999px;
+  background-color: var(--myColor1);
+  z-index: 5;
+  border: 2px solid var(--myColor4);
+  line-height: 4.5rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.addMovie{
+  position: absolute;
+  bottom: .5rem;
+  right: .5rem;
+  width: 5rem;
+  height: 5rem;
+  color: var(--myColor4);
+  transition: transform .3s ;
+}
+
+.addMovie:hover{
+  transform: scale(0.9);
+  cursor: pointer;
+}
 
 @keyframes animateBackground {
 

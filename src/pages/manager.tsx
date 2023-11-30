@@ -54,19 +54,21 @@ const Manager: React.FC = () => {
   return (
     <>
       <Provider store={store}>
-        <div className="backgroundComponent mainManagerContainer">
-          {backgroundImages.map((image, index) => (
-            <img
-              key={index}
-              className={`backgroundImage ${index === currentImageIndex ? 'visible' : ''}`}
-              src={image}
-              alt={`Background ${index}`}
-            />
-          ))}
+        <main className='mainManagerContainer'>
+          <div className="backgroundComponent">
+            {backgroundImages.map((image, index) => (
+              <img
+                key={index}
+                className={`backgroundImage ${index === currentImageIndex ? 'visible' : ''}`}
+                src={image}
+                alt={`Background ${index}`}
+              />
+            ))}
+          </div>
           <NavBar />
           <CategoryButtons />
           <MoviesList />
-        </div>
+        </main>
       </Provider>
     </>
   )

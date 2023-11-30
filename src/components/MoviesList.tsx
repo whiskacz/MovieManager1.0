@@ -23,7 +23,7 @@ const MoviesList = () => {
         if(selectedButton) {
         try {
           const apiKey = '179605625a183779c4f6614dbeb3a88c';
-          const language = 'pl';
+          const language = 'us';
           const apiUrl = `https://api.themoviedb.org/3/movie/${selectedButton}?language=pl&page=1`; // Zastąp "endpoint" właściwym adresem URL końcowym API TMDb
 
           const response = await axios.get(apiUrl, {
