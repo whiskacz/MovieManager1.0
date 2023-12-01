@@ -1,56 +1,87 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BsPlusCircle, BsXCircle, BsXLg } from "react-icons/bs";
+import { useLocation, Link } from 'react-router-dom';
 import { MovieData } from '../interfaces/interface';
 import axios from 'axios';
 
 const MovieDetails = () => {
+  const [movieDetails, setMovieDetails] = useState<MovieData | null>(null);
+  const [movieId, setMovieId] = useState<number | null>(null);
+  const {
+      title,
+      popularity,
+      poster_path,
+      homepage,
+      overview,
+      release_date
+    } = movieDetails || {};
     
-    const [movieId, setMovieId] = useState<number>()
-    const [movieData, setMovieData] = useState<MovieData[]>([]); 
-    
-    const location = useLocation()
+    const location = useLocation();
 
-    useEffect(() => {
-        const managerData = location.pathname.split('manager/')[1]; // Wyodrębnienie danych po "manager/"
-        console.log(managerData); // Wyświetlenie danych w konsoli
-    
-        setMovieId(movieId)
-      
-        const fetchData = async () => {
-         
-          try {
-            const apiKey = '179605625a183779c4f6614dbeb3a88c';
-            const language = 'us';
-            const apiUrl = `const url = 'https://api.themoviedb.org/3/find/${movieId}?external_source=';`;
-  
-            const response = await axios.get(apiUrl, {
-              params: {
-                api_key: apiKey,
-                language: language,
-                // Dodaj inne parametry zapytania, jeśli są wymagane
-              },
-            });
-  
-            const data = response.data.results
-            setMovieData(data)
-            // Tutaj możesz przetwarzać dane z odpowiedzi API
-            
-           //console.log(data);
-          } catch (error) {
-            console.error('Błąd pobierania danych:', error);
-          }
-        
-      }
-          console.log(movieData)
-          fetchData();
-        }, [location.pathname]);
-    
+  useEffect(() => {
+    const managerData = location.pathname.split('manager/')[1]; // Wyodrębnienie danych po "manager/"
+    const parsedMovieId = parseInt(managerData, 10);
+    if (!isNaN(parsedMovieId)) {
+      setMovieId(parsedMovieId);
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (movieId !== null) {
+      const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNzk2MDU2MjVhMTgzNzc5YzRmNjYxNGRiZWIzYTg4YyIsInN1YiI6IjY1NDI0NmMzMTM2NTQ1MDBhZTQ2OTY4ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kcDSwgHd1n2A6uKck6jK8U8Hu4PtORmyr6HcvjPoxEQ'
+        }
+      };
+
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options);
+          setMovieDetails(response.data);
+        } catch (error) {
+          console.error('Błąd pobierania danych:', error);
+        }
+      };
+
+      fetchData();
+    }
+}, [movieId]);
+
+console.log(movieDetails)
   return (
-    <>
-    <div>MovieDetails</div>
-    <div>{movieId}</div>
-    </>
-  )
-}
+    <div className='movieDetailsBackground'
+    style={{
+       
+        backgroundImage: `linear-gradient(rgba(0, 78, 152, 0.6), rgba(0, 78, 152, 0.6)), url(https://image.tmdb.org/t/p/original${poster_path})`,
+    }}>
+      {movieDetails !== null && (
+        <>
+        <main className='movieDetailsContainer'>
+          <img src={`https://image.tmdb.org/t/p/original${poster_path}`} alt="movie poster" />
+          <div className='movieDetailsInfoContainer'>
+            <span>{title}</span>
+            <span>{overview}</span>
+            <span>Released {release_date} Popularity {popularity}</span>
+            <a href={homepage}>{homepage}</a>
+            <div className='movieDetailsButtonContainer'>
+                <BsPlusCircle title="Add movie to your collection" className='movieDetailsButtons' />
+                <span>Add movie</span> 
+            </div>
+            <div className='movieDetailsButtonContainer'>
+                <BsXCircle title="Remove from your collection" className='movieDetailsButtons' />
+                <span>Remove movie</span> 
+            </div>
+          </div>
+        </main>
+        </>
+      )}
+      <Link to={'/manager'}>
+        <BsXLg className='closeButton'/>
+      </Link>
+    </div>
+  );
+};
 
-export default MovieDetails
+export default MovieDetails;

@@ -35,7 +35,10 @@ const SingleMovie: React.FC<{data: MovieData }> = ({ data  }) => {
                 <div>VOTE COUNT : {vote_count}</div>
                 <div>POPULARITY : {popularity}</div>
             </div>
-        <span className="voteCircle">
+        <span className="voteCircle" style={{
+            top: "0",
+            right: "0"
+        }}>
             {roundedAverage}
         </span>
         <BsPlusCircleFill className="addMovie" title="Add movie to your collection" />

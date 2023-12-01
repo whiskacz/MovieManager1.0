@@ -14,6 +14,12 @@ export interface MovieData {
     vote_average: number;
     poster_path: string;
     vote_count: number;
+    homepage: string;
+    overview: string;
+    budget: number;
+    status: string;
+    release_date: string;
+    
 }
 
 export interface StateMovieSection {

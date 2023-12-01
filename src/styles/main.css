@@ -15,7 +15,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-  overflow-x: hidden;
+  
 }
 
 .backgroundWrapper {
@@ -51,7 +51,6 @@ li > *  {
 .mainTitle * {
   font-size: 10vh;
   text-align: center;
- 
 }
 
 .loginPageWrapper{
@@ -63,7 +62,7 @@ li > *  {
   transition: 2s
 }
 
-.choiceContainer{
+.choiceContainer {
   width: 200px;
   height: 70px;
   display: flex;
@@ -72,14 +71,14 @@ li > *  {
   align-items: center;
 
 }
-.choiceTitle{
+.choiceTitle {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
 
-.choiceNavbar{
+.choiceNavbar {
   width: 50%;
   position: relative;  
   cursor: pointer;
@@ -90,12 +89,12 @@ li > *  {
   background-color: var(--myColor4);
 }
 
-.choiceTitle p{
-  color: white;
+.choiceTitle p {
+  color: var(--myColor1);
   font-size: 1.5rem;
 }
 
-.loginPageBox{
+.loginPageBox {
   width: 30vw;
   height: 50vh;
   background-color: var(--myColor1);
@@ -104,12 +103,12 @@ li > *  {
   border-radius: 5px;
 }
 
-.inputContainer{
+.inputContainer {
   width: 100%;
   gap:.5rem; 
 }
 
-.infoValidation{
+.infoValidation {
   width: 70%;
   margin-top: -10px;
   padding: 10px;
@@ -119,7 +118,7 @@ li > *  {
   font-size: 0.8rem;
 }
 
-.relativeBox{
+.relativeBox {
   width: 100%;
   height: 100%;
   display: flex;
@@ -148,8 +147,6 @@ li > *  {
   padding: .5rem 1rem;
   cursor: pointer;
 }
-
-
 
 .loginPageBox input {
   height: 2rem;
@@ -212,7 +209,7 @@ input::placeholder{
   justify-content: flex-start;
   align-items: center;
   background-color: var(--myColor1);
-  background-color: rgba(0, 0, 0, 0.3)
+  background-color: rgba(0, 78, 152, 0.3)
 }
 
 .filmInputSearchBar {
@@ -341,6 +338,7 @@ input::placeholder{
   align-items: center;
   width: 100%;
 }
+
 .mainMoviesListContainer > span{
   color: var(--myColor4);
   font-size: 4rem;
@@ -434,10 +432,8 @@ input::placeholder{
   
 }
 
-.voteCircle{
+.voteCircle {
   position: absolute;
-  top: 0;
-  right: 0;
   width: 5rem;
   height: 5rem;
   color: var(--myColor4);
@@ -450,7 +446,7 @@ input::placeholder{
   font-size: 2rem;
 }
 
-.addMovie{
+.addMovie {
   position: absolute;
   bottom: .5rem;
   right: .5rem;
@@ -460,10 +456,96 @@ input::placeholder{
   transition: transform .3s ;
 }
 
-.addMovie:hover{
+.addMovie:hover {
   transform: scale(0.9);
   cursor: pointer;
 }
+
+.movieDetailsBackground{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  
+}
+
+.movieDetailsContainer {
+  position: relative;
+  display: flex;
+  width: 50vw;
+  height: 60vh;
+  color: var(--myColor1);
+  font-size: 1rem;
+  border-radius: 10px;
+  background-color: rgba(0, 78, 152, 0.8);
+}
+
+.movieDetailsInfoContainer {
+  display: flex;
+  flex-basis: 50%;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1vw;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-align: justify;
+}
+.movieDetailsInfoContainer > span, a {
+  padding: 5px;
+  border-bottom: 1px solid var(--myColor1);
+}
+
+.movieDetailsInfoContainer > :nth-child(1) {
+  font-size: 3rem;
+}
+
+.movieDetailsButtonContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  transition: .5s;
+}
+
+.movieDetailsButtonContainer > span {
+  width: 1.2rem;
+  height: 1.2rem;
+  width: 80%;
+  line-height: 100%;
+}
+
+.movieDetailsButtons {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.movieDetailsButtons:hover {
+  color: var(--myColor5);
+  cursor: pointer;
+}
+
+.closeButton {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 5rem;
+  height: 5rem;
+  color: var(--myColor1);
+  cursor: pointer;
+  font-weight: 900;
+  transition: .3s;
+}
+
+.closeButton:hover {
+  transform: scale(1.2);
+}
+
 
 @keyframes animateBackground {
 
