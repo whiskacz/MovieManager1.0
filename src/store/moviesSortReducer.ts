@@ -5,9 +5,10 @@ const initialState: StateMovieSection = {
   selectedMovieSection: null, // lub initialState: { selectedButton: null }
 };
 
-const reducer = (state: StateMovieSection = initialState, action: ActionTypes): StateMovieSection => {
+const moviesSortReducer = (state: StateMovieSection = initialState, action: ActionTypes): StateMovieSection => {
   switch (action.type) {
     case SET_SELECTED_BUTTON:
+      console.log('SET_SELECTED_BUTTON dispatched!', action.payload); // Dodaj ten log
       return {
         ...state,
         selectedMovieSection: action.payload,
@@ -17,4 +18,4 @@ const reducer = (state: StateMovieSection = initialState, action: ActionTypes): 
   }
 };
 
-export default reducer;
+export default moviesSortReducer;

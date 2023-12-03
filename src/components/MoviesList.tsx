@@ -3,13 +3,19 @@ import { useSpring, animated } from 'react-spring';
 import axios from 'axios';
 import { MovieData } from '../interfaces/interface';
 import { useSelector } from 'react-redux';
-import { StateMovieSection } from '../interfaces/interface';
 import SingleMovie from './SingleMovie';
 
 const MoviesList = () => {
   
-  const [movieData, setMovieData] = useState<MovieData[]>([]);  
-  const selectedButton = useSelector((state: StateMovieSection) => state.selectedMovieSection);
+  const [movieData, setMovieData] = useState<MovieData[]>([]);
+  const moviesSearchList = useSelector((state: any) => state.moviesData?.moviesSearchList) || [];  
+  const selectedButton = useSelector((state: any) => state.moviesSort?.selectedMovieSection)
+
+  useEffect(() => {
+    if (moviesSearchList.length !== 0) {
+      setMovieData(moviesSearchList);
+    }
+  }, [moviesSearchList]);
     
     const props = useSpring({
         opacity: 1,
@@ -44,26 +50,25 @@ const MoviesList = () => {
         }
       };
     }
-        console.log(movieData)
         fetchData();
-      }, [selectedButton, movieData]);
+      }, [selectedButton]);
 
-
+      console.log(movieData)
   return (
     <animated.main className='mainMoviesListContainer' style={props}>
-        {movieData.length === 0 ?
+        {movieData.length === 0 ? ( 
         <span className='flexColumnCenter'>
             <div>Choose your list</div>
             <div>or find something new!</div>
             <p>Wybrany przycisk: {selectedButton}</p>        
-        </span> :
+        </span> ) : (
         
                 movieData.map((element) => (
                   <SingleMovie key={element.id} data={element} />
                 ))
                
               
-            }
+            )}
         
     </animated.main>
   )

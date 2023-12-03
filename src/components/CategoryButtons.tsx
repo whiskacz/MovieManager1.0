@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useSpring, animated } from 'react-spring';
-import { setButtonSelection } from '../store/actions';
+import { setButtonSelection } from '../store/moviesSortActions';
 import tmdbLogo from '../images/tmdbLogo.svg';
 
 
@@ -27,6 +27,7 @@ const CategoryButtons = () => {
 
 
     dispatch(setButtonSelection(selectedButton));
+    console.log('Button clicked!', selectedButton); 
   };
 
   const props = useSpring({
