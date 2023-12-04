@@ -1,7 +1,6 @@
-import { MovieData } from "../interfaces/interface";
 
 const initialState = {
-    moviesSearchList: [] as MovieData[],
+    moviesSearchList: [],
   };
   
   const moviesSearchReducer = (state = initialState, action: any) => {

@@ -19,9 +19,9 @@ export interface MovieData {
     budget: number;
     status: string;
     release_date: string;
-    
+
 }
 
 export interface StateMovieSection {
-    selectedMovieSection: string | null; // Możesz użyć null lub undefined
+    selectedMovieSection: string | null; 
 }
