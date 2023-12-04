@@ -1,17 +1,17 @@
-import { ActionTypes, SET_SELECTED_BUTTON, StateMovieSection } from '../interfaces/interface';
+import {  SET_SELECTED_BUTTON, MoviesSortState, Action } from '../interfaces/interface';
 
 
-const initialState: StateMovieSection = {
-  selectedMovieSection: null, // lub initialState: { selectedButton: null }
+const initialState: MoviesSortState = {
+  selectedButton: "",
 };
 
-const moviesSortReducer = (state: StateMovieSection = initialState, action: ActionTypes): StateMovieSection => {
+const moviesSortReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case SET_SELECTED_BUTTON:
       console.log('SET_SELECTED_BUTTON dispatched!', action.payload); // Dodaj ten log
       return {
         ...state,
-        selectedMovieSection: action.payload,
+        selectedButton: action.payload,
       };
     default:
       return state;

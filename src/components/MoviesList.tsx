@@ -9,7 +9,8 @@ import SingleMovie from './SingleMovie';
 const MoviesList = () => {
   
   const [movieData, setMovieData] = useState<MovieData[]>([]);  
-  const selectedButton = useSelector((state: StateMovieSection) => state.selectedMovieSection);
+  const selectedButton = useSelector((state: StateMovieSection) => state.moviesSort.selectedButton);
+
     
     const props = useSpring({
         opacity: 1,
@@ -35,7 +36,7 @@ const MoviesList = () => {
             },
           });
           const data = response.data.results
-          setMovieData([data])  
+          setMovieData(data)  
           console.log('Movie data updated:', data);      
         } catch (error) {
           console.error('Błąd pobierania danych:', error);
@@ -48,7 +49,7 @@ const MoviesList = () => {
       }, [selectedButton,movieData]);
   return (
     <animated.main className='mainMoviesListContainer' style={props}>
-        {movieData.length === 0 ?
+        {movieData && movieData.length === 0 ?
         <span className='flexColumnCenter'>
             <div>Choose your list</div>
             <div>or find something new!</div>

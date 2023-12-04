@@ -23,5 +23,16 @@ export interface MovieData {
 }
 
 export interface StateMovieSection {
-    selectedMovieSection: string | null; 
+    moviesSort: {
+      selectedButton: string;
+    }
+}
+
+export interface MoviesSortState {
+  selectedButton: string;
+}
+
+export interface Action {
+  type: string;
+  payload: string;
 }
