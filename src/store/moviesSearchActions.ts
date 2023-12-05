@@ -1,6 +1,6 @@
 import { MovieData } from "../interfaces/interface";
 
-export const updateMoviesSearchList = (movies: MovieData[]) => ({
+export const updateMoviesSearchList = (moviesSearchList: MovieData[]) => ({
     type: 'UPDATE_MOVIES_SEARCH_LIST',
-    payload: movies,
+    payload: moviesSearchList,
   });

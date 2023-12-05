@@ -26,6 +26,9 @@ export interface StateMovieSection {
     moviesSort: {
       selectedButton: string;
     }
+    moviesSearch: {
+      moviesSearchList: MovieData
+    }
 }
 
 export interface MoviesSortState {

@@ -10,6 +10,7 @@ const MoviesList = () => {
   
   const [movieData, setMovieData] = useState<MovieData[]>([]);  
   const selectedButton = useSelector((state: StateMovieSection) => state.moviesSort.selectedButton);
+  const moviesSearch: MovieData[] = useSelector((state: StateMovieSection) => state.moviesSearch.moviesSearchList);
 
     
     const props = useSpring({
@@ -47,9 +48,11 @@ const MoviesList = () => {
     fetchData();
     console.log(movieData)
       }, [selectedButton,movieData]);
+
+    console.log(` moviesSearch: ${moviesSearch}`)
   return (
     <animated.main className='mainMoviesListContainer' style={props}>
-        {movieData && movieData.length === 0 ?
+        {/* {movieData && movieData.length === 0 ?
         <span className='flexColumnCenter'>
             <div>Choose your list</div>
             <div>or find something new!</div>
@@ -57,6 +60,14 @@ const MoviesList = () => {
         </span> :
         
                 movieData.map((element) => (
+                  <SingleMovie key={element.id} data={element} />
+                ))
+               
+              
+            } */}
+             {
+        
+                moviesSearch.map((element) => (
                   <SingleMovie key={element.id} data={element} />
                 ))
                

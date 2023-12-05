@@ -17,39 +17,42 @@ const NavBar: React.FC = () => {
       delay: 500, 
     });
 
-  const handleInputSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value)
-  }
-  
-  const handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      
+    
+    
+    
+  const fetchData = async () => {
+    
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNzk2MDU2MjVhMTgzNzc5YzRmNjYxNGRiZWIzYTg4YyIsInN1YiI6IjY1NDI0NmMzMTM2NTQ1MDBhZTQ2OTY4ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kcDSwgHd1n2A6uKck6jK8U8Hu4PtORmyr6HcvjPoxEQ'
+      }
+    };
+
+    try {
+      const response = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`, options);
+      dispatch(updateMoviesSearchList(response.data.results));
+    } catch (error) {
+      console.error('Błąd pobierania danych:', error);
     }
   };
 
-  useEffect(() => {
+    const handleInputSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchValue(event.target.value)
+    }
     
-      const options = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNzk2MDU2MjVhMTgzNzc5YzRmNjYxNGRiZWIzYTg4YyIsInN1YiI6IjY1NDI0NmMzMTM2NTQ1MDBhZTQ2OTY4ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kcDSwgHd1n2A6uKck6jK8U8Hu4PtORmyr6HcvjPoxEQ'
-        }
-      };
-
-      const fetchData = async () => {
-        try {
-          const response = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`, options);
-          dispatch(updateMoviesSearchList(response.data));
-        } catch (error) {
-          console.error('Błąd pobierania danych:', error);
-        }
-      };
-
+    const handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        fetchData()
+      }
+    };
+    
+    useEffect(() => {
       fetchData();
+      
+    }, [searchValue, dispatch]);
     
-}, [searchValue, dispatch]);
-
 
   return (
     <>
