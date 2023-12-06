@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { TbLogout } from 'react-icons/tb';
 import { useSpring, animated } from 'react-spring';
 import { useDispatch } from 'react-redux';
@@ -9,6 +9,7 @@ const NavBar: React.FC = () => {
 
   const dispatch = useDispatch();
   const[searchValue, setSearchValue] = useState<number|string>('')
+  const[searchPush, setSearchPush] = useState<boolean>(false)
 
   const props = useSpring({
       opacity: 1,
@@ -20,7 +21,7 @@ const NavBar: React.FC = () => {
     
     
     
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     
     const options = {
       method: 'GET',
@@ -36,38 +37,41 @@ const NavBar: React.FC = () => {
     } catch (error) {
       console.error('Błąd pobierania danych:', error);
     }
-  };
+  }, [dispatch,searchValue]);
 
     const handleInputSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
       setSearchValue(event.target.value)
     }
     
-    const handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleEnterPress = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === 'Enter') {
-        fetchData()
+        setSearchPush(true)
       }
-    };
+    }, []);
     
     useEffect(() => {
+      if(searchPush){
       fetchData();
-      
-    }, [searchValue, dispatch]);
+      setSearchPush(false)
+      setSearchValue('')
+      }
+    }, [fetchData,searchPush,handleEnterPress]);
     
 
   return (
     <>
     <animated.main className='mainNavbar' style={props}>
-        <span>Film Manager 1.0</span>
+        <span>Movie Manager 1.0</span>
         <div className='filmInputSearchBar moduls'>
           <input 
           type="text"
           value={searchValue}
           onChange={handleInputSearch}
-          onKeyDown={handleEnterPress} 
+          onKeyDown={handleEnterPress}
           />
           <label>Enter film name</label>  
         </div>
-        <button>Search</button>
+        <button onClick={()=> setSearchPush(true)} >Search</button>
         <div className='logoutContainer'>
             <div>
                 Hello, /user/
