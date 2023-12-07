@@ -5,6 +5,7 @@ import { MovieData } from '../interfaces/interface';
 import { useSelector } from 'react-redux';
 import { StateMovieSection } from '../interfaces/interface';
 import SingleMovie from './SingleMovie';
+import isEqual from 'lodash/isEqual';
 
 const MoviesList = () => {
   const [movieData, setMovieData] = useState<MovieData[]>([]);
@@ -12,6 +13,8 @@ const MoviesList = () => {
   const moviesSearch: MovieData[] = useSelector((state: StateMovieSection) => state.moviesSearch.moviesSearchList);
   const [currentData, setCurrentData] = useState<MovieData[]>([]);
   const [sourceFlag, setSourceFlag] = useState<'movieData' | 'moviesSearch' | null>(null);
+  const [prevMovieData, setPrevMovieData] = useState<MovieData[]>([]);
+  const [prevMoviesSearch, setPrevMoviesSearch] = useState<MovieData[]>([]);
 
   const props = useSpring({
     opacity: 1,
@@ -37,7 +40,6 @@ const MoviesList = () => {
           const data = response.data.results;
           setMovieData(data);
           console.log('Movie data updated:', data);
-          setSourceFlag('movieData');
         } catch (error) {
           console.error('Błąd pobierania danych:', error);
         }
@@ -49,21 +51,29 @@ const MoviesList = () => {
   }, [selectedButton]);
 
   useEffect(() => {
-    if (sourceFlag === 'movieData') {
-      setCurrentData(movieData);
-    } else if (sourceFlag === 'moviesSearch' && moviesSearch.length > 0) {
-      setCurrentData(moviesSearch);
-    } else {
-      setCurrentData([]);
-    }
-  }, [movieData, moviesSearch, sourceFlag]);
+    const isMovieDataChanged = !isEqual(prevMovieData, movieData);
+    const isMoviesSearchChanged = !isEqual(prevMoviesSearch, moviesSearch);
 
-  useEffect(() => {
-    if (moviesSearch.length > 0 && currentData === moviesSearch) {
+    if (isMovieDataChanged) {
+      setCurrentData(movieData);
+      setSourceFlag('movieData');
+    } else if (isMoviesSearchChanged) {
       setCurrentData(moviesSearch);
       setSourceFlag('moviesSearch');
     }
-  }, [currentData, moviesSearch]);
+  }, [movieData, moviesSearch, prevMovieData, prevMoviesSearch, sourceFlag]);
+
+  useEffect(() => {
+    if (!isEqual(prevMovieData, movieData)) {
+      setPrevMovieData(movieData);
+    }
+  }, [movieData, prevMovieData]);
+
+  useEffect(() => {
+    if (!isEqual(prevMoviesSearch, moviesSearch)) {
+      setPrevMoviesSearch(moviesSearch);
+    }
+  }, [moviesSearch, prevMoviesSearch]);
 
   return (
     <animated.main className='mainMoviesListContainer' style={props}>
