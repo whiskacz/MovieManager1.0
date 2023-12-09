@@ -1,9 +1,14 @@
 import { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { BsFillArrowUpLeftCircleFill, BsCheckCircleFill, BsXCircleFill } from "react-icons/bs";
 import { MdEmail, MdLockOutline, MdAccountCircle } from "react-icons/md";
+import axios from "axios";
+
 
 export const LoginPage = () => {
     
+    let iconPosition: number 
+    const navigate = useNavigate()
 
     const [logInData,setLogInData] = useState<{
         user: string,
@@ -54,8 +59,6 @@ export const LoginPage = () => {
     const [position, setPosition] = useState<string>('sign');
     const [rotation, setRotation] = useState<number>(0);
 
-
-    
     const USER_REGEX = useMemo(() => {
         return /^[A-z][A-z0-9-_]{4,15}$/
     },[]) 
@@ -68,7 +71,7 @@ export const LoginPage = () => {
         return /^[A-Za-z\d]+@[A-Za-z\d]{2,}\.[A-Za-z\d]{2,}$/
     },[]) 
     
-    let iconPosition: number 
+    
     position === "sign" ?  iconPosition = -40 : iconPosition = 180
     const handleTogglePosition = () => {
         const newPosition: string = position === 'sign' ? 'register' : 'sign';
@@ -97,145 +100,203 @@ export const LoginPage = () => {
         setValidationSignUp(prevState => ({...prevState, email: EMAIL_REGEX.test(signUpData.email)}))
     },[signUpData.email, EMAIL_REGEX])
 
-  return (
+    const signUpClick = () => {
+        const newNote = {
+            user: signUpData.user,
+            password: signUpData.password,
+            email: signUpData.email
+        }
+        axios.post("http://localhost:5000/create", newNote)               
+    }
 
-    <main className='loginPageWrapper flexColumnCenter'>
-        <div className='choiceContainer'>
-            <div className='choiceTitle'>
-                <p>Log In</p>
-                <p>Sign Up</p>
-            </div>
-            <div className='choiceNavbar' onClick={handleTogglePosition}>
-                <div className='bar' />
-                <BsFillArrowUpLeftCircleFill style={{
-                    width:'2.5rem',
-                    height:'2.5rem',
-                    color:'var(--myColor1)',
-                    position:'absolute',
-                    top:'-50%',
-                    transform: `translateX(${iconPosition}%) rotate(${rotation}deg)`,
-                    transition: 'transform 0.5s ease',
-                    
-                }}/>
-            </div>
-        </div>
-        <div className='loginPageBox'>
-            {position === 'sign' ? 
-            <div className='relativeBox'>
-                <span>Log In</span>
-                <div className='inputContainer flexColumnCenter'>
-                    <div className='inputBox'>
-                        <div className="inputBoxPlaceHolder">
-                            <MdAccountCircle style={{width:'2rem', height:'2rem'}} />
-                            <input 
-                            type='text' 
-                            placeholder='User'
-                            value={logInData.user}
-                            onChange={(e)=>setLogInData(prevState => ({...prevState, user: e.target.value}))}
-                            onFocus={(event) => {setLogInData(prevState => ({...prevState, userFocus : true}))}}  
-                        />
-                        </div>
-                        <BsXCircleFill className={ logInData.userFocus && !validationLogIn.user ? "checkFalse" : "checkHidden"} />
-                        <BsCheckCircleFill className={validationLogIn.user ? "checkTrue" : "checkHidden"} />
-                        
-                    </div>
-                    {logInData.userFocus && !validationLogIn.user ? <span className="infoValidation">
-                        5 to 15 characters. Must begin with a letter.<br />
-                        Letters, numbers, underscores, hyphens allowed.
-                    </span> : null}
-                    <div className='inputBox'>
-                        <div className="inputBoxPlaceHolder">
-                            <MdLockOutline style={{width:'2rem', height:'2rem'}} />
-                            <input 
-                            type='password' 
-                            placeholder='Password'
-                            value={logInData.password}
-                            onChange={(e)=>setLogInData(prevState => ({...prevState, password: e.target.value}))} 
-                            onFocus={(event) => {setLogInData(prevState => ({...prevState, passwordFocus : true}))}} 
-                            />
-                        </div>
-                        <BsXCircleFill className={ logInData.passwordFocus && !validationLogIn.password ? "checkFalse" : "checkHidden"} />
-                        <BsCheckCircleFill className={validationLogIn.password ? "checkTrue" : "checkHidden"} />
-                    </div>
-                    {logInData.passwordFocus && !validationLogIn.password ? <span className="infoValidation">
-                        5 to 20 characters.Must include uppercase and lowercase letters, a number and a special character.<br />
-                        Allowed special characters: !@#$% 
-                    </span> : null }
-                </div>
-                <div className='buttonContainer flexColumnCenter'>
-                    <button disabled={validationLogIn.user || validationLogIn.password ? false : true}>
-                        Login
-                    </button>
-                    {/* <span>
-                        Forgot your password?
-                    </span> */}
-                </div>
-
-            </div>
-            :
-            <div className='relativeBox'>
-                <span>Sign Up</span>
-                <div className='inputContainer flexColumnCenter'>
-                    <div className='inputBox'>
-                        <div className="inputBoxPlaceHolder">
-                            <MdAccountCircle style={{width:'2rem', height:'2rem'}} />
-                            <input 
-                            type='text' 
-                            placeholder='Full Name'
-                            value={signUpData.user}
-                            onChange={(e)=>setSignUpData(prevState => ({...prevState, user:e.target.value}))}
-                            onFocus={(event) => {setSignUpData(prevState => ({...prevState, userFocus : true}))}} 
-                            />
-                        </div>
-                        <BsXCircleFill className={ signUpData.userFocus && !validationSignUp.user ? "checkFalse" : "checkHidden"} />
-                        <BsCheckCircleFill className={validationSignUp.user ? "checkTrue" : "checkHidden"} />
-                    </div>
-                    {signUpData.userFocus && !validationSignUp.user ? <span className="infoValidation">
-                        5 to 15 characters. Must begin with a letter.<br />
-                        Letters, numbers, underscores, hyphens allowed.
-                    </span> : null}
-                    <div className='inputBox'>
-                        <div className="inputBoxPlaceHolder">
-                            <MdLockOutline style={{width:'2rem', height:'2rem'}} />
-                            <input 
-                            type='password' 
-                            placeholder='Password'
-                            value={signUpData.password}
-                            onChange={(e)=>setSignUpData(prevState => ({...prevState, password:e.target.value}))}
-                            onFocus={(event) => {setSignUpData(prevState => ({...prevState, passwordFocus : true}))}} 
-                            />
-                        </div>
-                        <BsXCircleFill className={ signUpData.passwordFocus && !validationSignUp.password ? "checkFalse" : "checkHidden"} />
-                        <BsCheckCircleFill className={validationSignUp.password ? "checkTrue" : "checkHidden"} />
-                    </div>
-                    {signUpData.passwordFocus && !validationSignUp.password ? <span className="infoValidation">
-                        5 to 20 characters.Must include uppercase and lowercase letters, a number and a special character.<br />
-                        Allowed special characters: !@#$% 
-                    </span> : null }
-                    <div className='inputBox'>
-                        <div className="inputBoxPlaceHolder">
-                            <MdEmail style={{width:'2rem', height:'2rem'}} />
-                            <input 
-                            type='text' 
-                            placeholder='Email'
-                            value={signUpData.email}
-                            onChange={(e)=>setSignUpData(prevState => ({...prevState, email:e.target.value}))}
-                            onFocus={(event) => {setSignUpData(prevState => ({...prevState, emailFocus : true}))}} 
-                            />
-                        </div>
-                        <BsXCircleFill className={ signUpData.emailFocus && !validationSignUp.email ? "checkFalse" : "checkHidden"} />
-                        <BsCheckCircleFill className={validationSignUp.email ? "checkTrue" : "checkHidden"} />
-                    </div>
-                    {signUpData.emailFocus && !validationSignUp.email ? <span className="infoValidation">
-                        Minimum 5 characters.Must include: @ 
-                    </span> : null }
-                </div>
-                <button disabled={validationSignUp.user || validationSignUp.password || validationSignUp.email ? false : true}>
-                    Register
-                </button>
-            </div>
+    const logInClick = () => {
+        const newNote = {
+            user: logInData.user,
+            password: logInData.password
+        }
+        axios.post("http://localhost:5000/login", newNote)
+        .then((response) => {
+            if(response.status === 200) {
+                navigate("/manager")
             }
-        </div>    
-    </main>
+        })
+        .catch((error) => {
+            const articlePopUp = document.querySelector('.articlePopUp')as HTMLElement | null;
+            if(articlePopUp) {
+                let errorMessage = '';
+                switch (error.response.status) {
+                    case 401:
+                        errorMessage = 'Invalid password';
+                        break;
+                    case 404:
+                        errorMessage = 'User not found';
+                        break;
+                    case 500:
+                        errorMessage = 'Server error';
+                        break;
+                    default:
+                        errorMessage = 'Unknown error';
+                }
+                articlePopUp.textContent = errorMessage;
+                articlePopUp.style.right = '2vw';
+                setTimeout(() => {
+                    articlePopUp.style.right = '-102vw';
+                    articlePopUp.textContent = ''; // Usunięcie komunikatu po zakończeniu animacji
+                }, 10000); // Czas trwania animacji w milisekundach (10 sekund)
+            }
+            console.error('Login failed', error);
+        }) 
+    }
+
+  return (
+    <>
+        <main className='loginPageWrapper flexColumnCenter'>
+            <div className='choiceContainer'>
+                <div className='choiceTitle'>
+                    <p>Log In</p>
+                    <p>Sign Up</p>
+                </div>
+                <div className='choiceNavbar' onClick={handleTogglePosition}>
+                    <div className='bar' />
+                    <BsFillArrowUpLeftCircleFill style={{
+                        width:'2.5rem',
+                        height:'2.5rem',
+                        color:'var(--myColor1)',
+                        position:'absolute',
+                        top:'-50%',
+                        transform: `translateX(${iconPosition}%) rotate(${rotation}deg)`,
+                        transition: 'transform 0.5s ease',
+                        
+                    }}/>
+                </div>
+            </div>
+            <div className='loginPageBox'>
+                {position === 'sign' ? 
+                <div className='relativeBox'>
+                    <span>Log In</span>
+                    <div className='inputContainer flexColumnCenter'>
+                        <div className='inputBox'>
+                            <div className="inputBoxPlaceHolder">
+                                <MdAccountCircle style={{width:'2rem', height:'2rem'}} />
+                                <input 
+                                type='text' 
+                                placeholder='User'
+                                value={logInData.user}
+                                onChange={(e)=>setLogInData(prevState => ({...prevState, user: e.target.value}))}
+                                onFocus={(event) => {setLogInData(prevState => ({...prevState, userFocus : true}))}}  
+                            />
+                            </div>
+                            <BsXCircleFill className={ logInData.userFocus && !validationLogIn.user ? "checkFalse" : "checkHidden"} />
+                            <BsCheckCircleFill className={validationLogIn.user ? "checkTrue" : "checkHidden"} />
+                            
+                        </div>
+                        {logInData.userFocus && !validationLogIn.user ? <span className="infoValidation">
+                            5 to 15 characters. Must begin with a letter.<br />
+                            Letters, numbers, underscores, hyphens allowed.
+                        </span> : null}
+                        <div className='inputBox'>
+                            <div className="inputBoxPlaceHolder">
+                                <MdLockOutline style={{width:'2rem', height:'2rem'}} />
+                                <input 
+                                type='password' 
+                                placeholder='Password'
+                                value={logInData.password}
+                                onChange={(e)=>setLogInData(prevState => ({...prevState, password: e.target.value}))} 
+                                onFocus={(event) => {setLogInData(prevState => ({...prevState, passwordFocus : true}))}} 
+                                />
+                            </div>
+                            <BsXCircleFill className={ logInData.passwordFocus && !validationLogIn.password ? "checkFalse" : "checkHidden"} />
+                            <BsCheckCircleFill className={validationLogIn.password ? "checkTrue" : "checkHidden"} />
+                        </div>
+                        {logInData.passwordFocus && !validationLogIn.password ? <span className="infoValidation">
+                            5 to 20 characters.Must include uppercase and lowercase letters, a number and a special character.<br />
+                            Allowed special characters: !@#$% 
+                        </span> : null }
+                    </div>
+                    <div className='buttonContainer flexColumnCenter'>
+                        <button 
+                        disabled={validationLogIn.user || validationLogIn.password ? false : true}
+                        onClick={logInClick}
+                        >
+                            Login
+                        </button>
+                        {/* <span>
+                            Forgot your password?
+                        </span> */}
+                    </div>
+
+                </div>
+                :
+                <div className='relativeBox'>
+                    <span>Sign Up</span>
+                    <div className='inputContainer flexColumnCenter'>
+                        <div className='inputBox'>
+                            <div className="inputBoxPlaceHolder">
+                                <MdAccountCircle style={{width:'2rem', height:'2rem'}} />
+                                <input 
+                                type='text' 
+                                placeholder='Full Name'
+                                value={signUpData.user}
+                                onChange={(e)=>setSignUpData(prevState => ({...prevState, user:e.target.value}))}
+                                onFocus={(event) => {setSignUpData(prevState => ({...prevState, userFocus : true}))}} 
+                                />
+                            </div>
+                            <BsXCircleFill className={ signUpData.userFocus && !validationSignUp.user ? "checkFalse" : "checkHidden"} />
+                            <BsCheckCircleFill className={validationSignUp.user ? "checkTrue" : "checkHidden"} />
+                        </div>
+                        {signUpData.userFocus && !validationSignUp.user ? <span className="infoValidation">
+                            5 to 15 characters. Must begin with a letter.<br />
+                            Letters, numbers, underscores, hyphens allowed.
+                        </span> : null}
+                        <div className='inputBox'>
+                            <div className="inputBoxPlaceHolder">
+                                <MdLockOutline style={{width:'2rem', height:'2rem'}} />
+                                <input 
+                                type='password' 
+                                placeholder='Password'
+                                value={signUpData.password}
+                                onChange={(e)=>setSignUpData(prevState => ({...prevState, password:e.target.value}))}
+                                onFocus={(event) => {setSignUpData(prevState => ({...prevState, passwordFocus : true}))}} 
+                                />
+                            </div>
+                            <BsXCircleFill className={ signUpData.passwordFocus && !validationSignUp.password ? "checkFalse" : "checkHidden"} />
+                            <BsCheckCircleFill className={validationSignUp.password ? "checkTrue" : "checkHidden"} />
+                        </div>
+                        {signUpData.passwordFocus && !validationSignUp.password ? <span className="infoValidation">
+                            5 to 20 characters.Must include uppercase and lowercase letters, a number and a special character.<br />
+                            Allowed special characters: !@#$% 
+                        </span> : null }
+                        <div className='inputBox'>
+                            <div className="inputBoxPlaceHolder">
+                                <MdEmail style={{width:'2rem', height:'2rem'}} />
+                                <input 
+                                type='text' 
+                                placeholder='Email'
+                                value={signUpData.email}
+                                onChange={(e)=>setSignUpData(prevState => ({...prevState, email:e.target.value}))}
+                                onFocus={(event) => {setSignUpData(prevState => ({...prevState, emailFocus : true}))}} 
+                                />
+                            </div>
+                            <BsXCircleFill className={ signUpData.emailFocus && !validationSignUp.email ? "checkFalse" : "checkHidden"} />
+                            <BsCheckCircleFill className={validationSignUp.email ? "checkTrue" : "checkHidden"} />
+                        </div>
+                        {signUpData.emailFocus && !validationSignUp.email ? <span className="infoValidation">
+                            Minimum 5 characters.Must include: @ 
+                        </span> : null }
+                    </div>
+                    <button 
+                    disabled={validationSignUp.user || validationSignUp.password || validationSignUp.email ? false : true}
+                    onClick={signUpClick}
+                    >
+                        Register
+                    </button>
+                </div>
+                }
+            </div>    
+        </main>
+        <article className="articlePopUp">
+            Access denied
+        </article>
+    </>
   )
 }
