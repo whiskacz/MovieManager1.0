@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react'
 import { TbLogout } from 'react-icons/tb';
 import { useSpring, animated } from 'react-spring';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateMoviesSearchList } from '../store/moviesSearchActions';
+import { StateMovieSection } from '../interfaces/interface';
 import axios from 'axios';
 
 const NavBar: React.FC = () => {
@@ -10,6 +11,7 @@ const NavBar: React.FC = () => {
   const dispatch = useDispatch();
   const[searchValue, setSearchValue] = useState<number|string>('')
   const[searchPush, setSearchPush] = useState<boolean>(false)
+  const loggedUser = useSelector((state: StateMovieSection) => state.loggedUser.loggedUser)
 
   const props = useSpring({
       opacity: 1,
@@ -56,8 +58,7 @@ const NavBar: React.FC = () => {
       setSearchValue('')
       }
     }, [fetchData,searchPush,handleEnterPress]);
-    
-
+    console.log(`loggedUser: ${loggedUser}`)
   return (
     <>
     <animated.main className='mainNavbar' style={props}>
@@ -74,7 +75,7 @@ const NavBar: React.FC = () => {
         <button onClick={()=> setSearchPush(true)} >Search</button>
         <div className='logoutContainer'>
             <div>
-                Hello, /user/
+                Hello, {loggedUser}
             </div>
             <TbLogout style={{width:'1.5rem', height:'1.5rem', cursor:'pointer'}} />
         </div>

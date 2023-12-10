@@ -1,5 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setUserName } from "../store/loggedUserActions";
 import { BsFillArrowUpLeftCircleFill, BsCheckCircleFill, BsXCircleFill } from "react-icons/bs";
 import { MdEmail, MdLockOutline, MdAccountCircle } from "react-icons/md";
 import axios from "axios";
@@ -9,6 +11,7 @@ export const LoginPage = () => {
     
     let iconPosition: number 
     const navigate = useNavigate()
+    const dispatch = useDispatch();
 
     const [logInData,setLogInData] = useState<{
         user: string,
@@ -106,7 +109,48 @@ export const LoginPage = () => {
             password: signUpData.password,
             email: signUpData.email
         }
-        axios.post("http://localhost:5000/create", newNote)               
+        axios.post("http://localhost:5000/create", newNote)
+        .then((response) => {
+            if (response.status === 201) {
+                setSignUpData({
+                    user: '',
+                    password: '',
+                    email: '',
+                    userFocus: false,
+                    passwordFocus: false,
+                    emailFocus: false
+                });
+                const articlePopUp = document.querySelector('.articlePopUp') as HTMLElement | null;
+                if (articlePopUp) {
+                    articlePopUp.textContent = 'User created successfully';
+                    articlePopUp.style.right = '2vw';
+                    setTimeout(() => {
+                        articlePopUp.style.right = '-102vw';
+                        articlePopUp.textContent = '';
+                    }, 5000);
+                }
+            }
+        })
+        .catch((error) => {
+            const articlePopUp = document.querySelector('.articlePopUp') as HTMLElement | null;
+            if (articlePopUp) {
+                let errorMessage = '';
+                switch (error.response.status) {
+                    case 500:
+                        errorMessage = 'Server error';
+                        break;
+                    default:
+                        errorMessage = 'Unknown error';
+                }
+                articlePopUp.textContent = errorMessage;
+                articlePopUp.style.right = '2vw';
+                setTimeout(() => {
+                    articlePopUp.style.right = '-102vw';
+                    articlePopUp.textContent = '';
+                }, 5000);
+            }
+            console.error('Sign Up failed', error);
+        });               
     }
 
     const logInClick = () => {
@@ -117,6 +161,7 @@ export const LoginPage = () => {
         axios.post("http://localhost:5000/login", newNote)
         .then((response) => {
             if(response.status === 200) {
+                dispatch(setUserName(logInData.user));
                 navigate("/manager")
             }
         })
@@ -142,7 +187,7 @@ export const LoginPage = () => {
                 setTimeout(() => {
                     articlePopUp.style.right = '-102vw';
                     articlePopUp.textContent = ''; // Usunięcie komunikatu po zakończeniu animacji
-                }, 10000); // Czas trwania animacji w milisekundach (10 sekund)
+                }, 5000); // Czas trwania animacji w milisekundach (10 sekund)
             }
             console.error('Login failed', error);
         }) 

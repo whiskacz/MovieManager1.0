@@ -29,6 +29,9 @@ export interface StateMovieSection {
     moviesSearch: {
       moviesSearchList: MovieData[]
     }
+    loggedUser: {
+      loggedUser:string
+    }
 }
 
 export interface MoviesSortState {
@@ -38,4 +41,13 @@ export interface MoviesSortState {
 export interface Action {
   type: string;
   payload: string;
+}
+
+export interface LoggedUser {
+  username: string;
+}
+
+export interface LoggedUserAction {
+  type: string;
+  payload: LoggedUser;
 }

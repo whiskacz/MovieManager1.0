@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Provider } from 'react-redux/es/exports';
-import store from '../store/store';
 import NavBar from '../components/NavBar'
 import CategoryButtons from '../components/CategoryButtons'
 import MoviesList from '../components/MoviesList'
@@ -9,6 +7,7 @@ import backgroundImage2 from '../images/img2.jpg';
 import backgroundImage3 from '../images/img3.jpg';
 import backgroundImage4 from '../images/img4.jpg';
 import backgroundImage5 from '../images/img5.jpg';
+
 
 
 const Manager: React.FC = () => {
@@ -53,23 +52,21 @@ const Manager: React.FC = () => {
   
   return (
     <>
-      <Provider store={store}>
-        <main className='mainManagerContainer'>
-          <div className="backgroundComponent">
-            {backgroundImages.map((image, index) => (
-              <img
-                key={index}
-                className={`backgroundImage ${index === currentImageIndex ? 'visible' : ''}`}
-                src={image}
-                alt={`Background ${index}`}
-              />
-            ))}
-          </div>
-          <NavBar />
-          <CategoryButtons />
-          <MoviesList />
-        </main>
-      </Provider>
+      <main className='mainManagerContainer'>
+        <div className="backgroundComponent">
+          {backgroundImages.map((image, index) => (
+            <img
+              key={index}
+              className={`backgroundImage ${index === currentImageIndex ? 'visible' : ''}`}
+              src={image}
+              alt={`Background ${index}`}
+            />
+          ))}
+        </div>
+        <NavBar />
+        <CategoryButtons />
+        <MoviesList />
+      </main>
     </>
   )
 }
