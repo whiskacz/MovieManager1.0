@@ -2,11 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { BsPlusCircle, BsXCircle, BsXLg } from "react-icons/bs";
 import { useLocation, Link } from 'react-router-dom';
 import { MovieData } from '../interfaces/interface';
+import { useSelector } from 'react-redux';
+import { StateMovieSection } from '../interfaces/interface';
+import useMovieActions from '../hooks/useMovieActions';
 import axios from 'axios';
 
 const MovieDetails = () => {
+
   const [movieDetails, setMovieDetails] = useState<MovieData | null>(null);
   const [movieId, setMovieId] = useState<number | null>(null);
+
+  const loggedUser = useSelector((state: StateMovieSection) => state.loggedUser.loggedUser)
+  
+  const { handleAddMovie, handleRemoveMovie } = useMovieActions();
   const {
       title,
       popularity,
@@ -16,7 +24,7 @@ const MovieDetails = () => {
       release_date
     } = movieDetails || {};
     
-    const location = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     const managerData = location.pathname.split('manager/')[1]; // Wyodrębnienie danych po "manager/"
@@ -47,9 +55,22 @@ const MovieDetails = () => {
 
       fetchData();
     }
-}, [movieId]);
+  }, [movieId]);
 
-console.log(movieDetails)
+  const handleAddToCollection = () => {
+    if (movieId) {
+      // Wywołanie funkcji do dodawania filmu do kolekcji
+      handleAddMovie(loggedUser, Number(movieId)); // Tutaj możesz przekazać odpowiednie userId
+    }
+  };
+
+  const handleRemoveFromCollection = () => {
+    if (movieId) {
+      // Wywołanie funkcji do usuwania filmu z kolekcji
+      handleRemoveMovie(loggedUser, Number(movieId)); // Tutaj możesz przekazać odpowiednie userId
+    }
+  };
+  console.log(movieDetails)
   return (
     <div className='movieDetailsBackground'
     style={{
@@ -66,11 +87,19 @@ console.log(movieDetails)
             <span>Released {release_date} Popularity {popularity}</span>
             <a href={homepage}>{homepage}</a>
             <div className='movieDetailsButtonContainer'>
-                <BsPlusCircle title="Add movie to your collection" className='movieDetailsButtons' />
+                <BsPlusCircle 
+                title="Add movie to your collection" 
+                className='movieDetailsButtons' 
+                onClick={handleAddToCollection}
+                />
                 <span>Add movie</span> 
             </div>
             <div className='movieDetailsButtonContainer'>
-                <BsXCircle title="Remove from your collection" className='movieDetailsButtons' />
+                <BsXCircle 
+                title="Remove from your collection" 
+                className='movieDetailsButtons'
+                onClick={handleRemoveFromCollection} 
+                />
                 <span>Remove movie</span> 
             </div>
           </div>
@@ -84,4 +113,4 @@ console.log(movieDetails)
   );
 };
 
-export default MovieDetails;
+export default MovieDetails
