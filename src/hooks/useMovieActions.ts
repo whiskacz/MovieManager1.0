@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 const useMovieActions = () => {
-  const handleAddMovie = async (userId: string, movieId: number) => {
+  const handleAddMovie = async (user: string, movieId: string) => {
     try {
       const response = await axios.post("http://localhost:5000/moviesEdit", {
-        userId,
+        user,
         action: 'add',
         movieId,
       });
@@ -15,10 +15,10 @@ const useMovieActions = () => {
     }
   };
 
-  const handleRemoveMovie = async (userId: string, movieId: number) => {
+  const handleRemoveMovie = async (user: string, movieId: string) => {
     try {
       const response = await axios.post("http://localhost:5000/moviesEdit", {
-        userId,
+        user,
         action: 'remove',
         movieId,
       });

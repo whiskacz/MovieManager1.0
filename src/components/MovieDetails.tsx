@@ -10,7 +10,7 @@ import axios from 'axios';
 const MovieDetails = () => {
 
   const [movieDetails, setMovieDetails] = useState<MovieData | null>(null);
-  const [movieId, setMovieId] = useState<number | null>(null);
+  const [movieId, setMovieId] = useState<string | null>(null);
 
   const loggedUser = useSelector((state: StateMovieSection) => state.loggedUser.loggedUser)
   
@@ -28,10 +28,7 @@ const MovieDetails = () => {
 
   useEffect(() => {
     const managerData = location.pathname.split('manager/')[1]; // Wyodrębnienie danych po "manager/"
-    const parsedMovieId = parseInt(managerData, 10);
-    if (!isNaN(parsedMovieId)) {
-      setMovieId(parsedMovieId);
-    }
+    setMovieId(managerData);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -57,20 +54,19 @@ const MovieDetails = () => {
     }
   }, [movieId]);
 
-  const handleAddToCollection = () => {
-    if (movieId) {
-      // Wywołanie funkcji do dodawania filmu do kolekcji
-      handleAddMovie(loggedUser, Number(movieId)); // Tutaj możesz przekazać odpowiednie userId
+
+
+  const handleAddToCollection = async () => {
+    if (movieId && loggedUser) {
+      handleAddMovie(loggedUser, movieId);
     }
   };
 
-  const handleRemoveFromCollection = () => {
-    if (movieId) {
-      // Wywołanie funkcji do usuwania filmu z kolekcji
-      handleRemoveMovie(loggedUser, Number(movieId)); // Tutaj możesz przekazać odpowiednie userId
+  const handleRemoveFromCollection = async () => {
+    if (movieId && loggedUser) {
+      handleRemoveMovie(loggedUser, movieId);
     }
   };
-  console.log(movieDetails)
   return (
     <div className='movieDetailsBackground'
     style={{
