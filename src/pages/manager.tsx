@@ -7,6 +7,7 @@ import backgroundImage2 from '../images/img2.jpg';
 import backgroundImage3 from '../images/img3.jpg';
 import backgroundImage4 from '../images/img4.jpg';
 import backgroundImage5 from '../images/img5.jpg';
+import MovieListComponent from '../components/MoviesListComponent';
 
 
 
@@ -66,6 +67,7 @@ const Manager: React.FC = () => {
         <NavBar />
         <CategoryButtons />
         <MoviesList />
+        <MovieListComponent />
       </main>
     </>
   )

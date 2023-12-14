@@ -1,35 +1,39 @@
+// useMovieActions.ts
+
 import axios from 'axios';
+import { MovieData } from '../interfaces/interface';
 
 const useMovieActions = () => {
-  const handleAddMovie = async (user: string, movieId: string) => {
-    try {
-      const response = await axios.post("http://localhost:5000/moviesEdit", {
-        user,
-        action: 'add',
-        movieId,
-      });
+    const handleAddMovie = async (user: string, movieData : MovieData) => {
+        try {
+            const response = await axios.post("http://localhost:5000/moviesEdit", {
+                user,
+                action: 'add',
+                movieData,
+            });
 
-      console.log(response.data);
-    } catch (error) {
-      console.error('Błąd podczas dodawania filmu:', error);
-    }
+            console.log(response.data);
+        } catch (error) {
+            console.error('Błąd podczas dodawania filmu:', error);
+        }
+    };
+
+    const handleRemoveMovie = async (user: string, movieData: MovieData) => {
+      try {
+          const { id } = movieData; // Pobranie ID z obiektu movieData
+          const response = await axios.post("http://localhost:5000/moviesEdit", {
+              user,
+              action: 'remove',
+              movieData: { id }, // Przekazanie tylko ID
+          });
+  
+          console.log(response.data);
+      } catch (error) {
+          console.error('Błąd podczas usuwania filmu:', error);
+      }
   };
 
-  const handleRemoveMovie = async (user: string, movieId: string) => {
-    try {
-      const response = await axios.post("http://localhost:5000/moviesEdit", {
-        user,
-        action: 'remove',
-        movieId,
-      });
-
-      console.log(response.data);
-    } catch (error) {
-      console.error('Błąd podczas usuwania filmu:', error);
-    }
-  };
-
-  return { handleAddMovie, handleRemoveMovie };
+    return { handleAddMovie, handleRemoveMovie };
 };
 
 export default useMovieActions;
