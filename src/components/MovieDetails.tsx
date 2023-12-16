@@ -64,9 +64,10 @@ const handleRemoveFromCollection = async () => {
 
   return (
     <div className='movieDetailsBackground'
-    style={{
-       
-        backgroundImage: `linear-gradient(rgba(0, 78, 152, 0.6), rgba(0, 78, 152, 0.6)), url(https://image.tmdb.org/t/p/original${poster_path})`,
+    style={{ 
+        backgroundImage: `linear-gradient(rgba(0, 78, 152, 0.6), 
+        rgba(0, 78, 152, 0.6)), 
+        url(https://image.tmdb.org/t/p/original${poster_path})`,
     }}>
       {movieDetails !== null && (
         <>
@@ -75,7 +76,8 @@ const handleRemoveFromCollection = async () => {
           <div className='movieDetailsInfoContainer'>
             <span>{title}</span>
             <span>{overview}</span>
-            <span>Released {release_date} Popularity {popularity}</span>
+            <span>Released {release_date}</span>
+            <span>Popularity {popularity}</span>
             <a href={homepage}>{homepage}</a>
             <div className='movieDetailsButtonContainer'>
                 <BsPlusCircle 

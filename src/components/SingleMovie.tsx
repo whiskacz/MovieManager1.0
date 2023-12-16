@@ -27,7 +27,7 @@ const SingleMovie: React.FC<{data: MovieData }> = ({ data  }) => {
         <main className="singleMovieContainer">
         
             <Link to={`/manager/${id}`}>
-            <img src={`https://image.tmdb.org/t/p/original${poster_path}`} alt="movie poster" />
+            <img src={`https://image.tmdb.org/t/p/original${poster_path}`} alt="movie poster" title="click for details"/>
             </Link>
             <div>{truncatedTitle}</div>
             <div className="singleMovieInfo">
@@ -35,10 +35,7 @@ const SingleMovie: React.FC<{data: MovieData }> = ({ data  }) => {
                 <div>VOTE COUNT : {vote_count}</div>
                 <div>POPULARITY : {popularity}</div>
             </div>
-        <span className="voteCircle" style={{
-            top: "0",
-            right: "0"
-        }}>
+        <span className="voteCircle" >
             {roundedAverage}
         </span>
         <BsPlusCircleFill className="addMovie" title="Add movie to your collection" />

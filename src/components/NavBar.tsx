@@ -80,7 +80,7 @@ const NavBar: React.FC = () => {
             <div>
                 Hello, {loggedUser}
             </div>
-            <TbLogout style={{width:'1.5rem', height:'1.5rem', cursor:'pointer'}} onClick={handleLogout} />
+            <TbLogout onClick={handleLogout} title='LOGOUT'/>
         </div>
     </animated.main>
     </>

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
-import axios from 'axios';
 import { MovieData } from '../interfaces/interface';
 import { useSelector } from 'react-redux';
 import { StateMovieSection } from '../interfaces/interface';
 import SingleMovie from './SingleMovie';
 import isEqual from 'lodash/isEqual';
+import axios from 'axios';
 
 const MoviesList = () => {
   const [movieData, setMovieData] = useState<MovieData[]>([]);
