@@ -1,14 +1,14 @@
-## Movie Manager 1.0
+## **Movie Manager 1.0**
 
 ### Introduction
 The application is an interactive movie manager designed for browsing, searching, and managing a collection of movies. Its main features include login functionality, user account creation, browsing the most popular, top-rated, and upcoming movies from the external TMDB API, as well as creating a personalized movie list for each registered user.
 
 ### The application utilizes:
-Frontend: React with TypeScript, employing React Router for managing routes, and Redux for handling the application's state.
-Backend: A server written in Express.js with MongoDB as the database.
+Frontend: **React with TypeScript**, employing **React Router** for managing routes, and **Redux** for handling the application's state.
+Backend: A server written in **Express.js** with **MongoDB** as the database.
 
 ### Additional tools: 
-Axios for handling network requests and primarily communicating with the TMDB service API, Lodash for simplifying data operations, mongoose for handling the external database, and Tailwind CSS for partial styling.
+**Axios** for handling network requests and primarily communicating with the **TMDB API**, Lodash for simplifying data operations, **mongoose** for handling the external database, and **Tailwind CSS** for partial styling.
 
 ### Routing Structure Description
 The application uses React Router to manage paths and render appropriate components based on the logged-in user's status.
