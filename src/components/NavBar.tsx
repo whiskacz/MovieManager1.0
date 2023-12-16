@@ -78,7 +78,7 @@ const NavBar: React.FC = () => {
         <button onClick={()=> setSearchPush(true)} >Search</button>
         <div className='logoutContainer'>
             <div>
-                Hello, {loggedUser}
+                {loggedUser}
             </div>
             <TbLogout onClick={handleLogout} title='LOGOUT'/>
         </div>

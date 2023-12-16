@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import NavBar from '../components/NavBar'
-import CategoryButtons from '../components/CategoryButtons'
-import MoviesList from '../components/MoviesList'
-import backgroundImage1 from '../images/img1.jpg'; // Importuj wszystkie obrazy z folderu images
+import NavBar from '../components/NavBar';
+import CategoryButtons from '../components/CategoryButtons';
+import MoviesList from '../components/MoviesList';
+import backgroundImage1 from '../images/img1.jpg';
 import backgroundImage2 from '../images/img2.jpg';
 import backgroundImage3 from '../images/img3.jpg';
 import backgroundImage4 from '../images/img4.jpg';
 import backgroundImage5 from '../images/img5.jpg';
 
+
 const Manager: React.FC = () => {
+
+  
 
   const [backgroundImages] = useState([backgroundImage1, backgroundImage2, backgroundImage3, backgroundImage4, backgroundImage5 ]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex(prevIndex => (prevIndex + 1) % backgroundImages.length);

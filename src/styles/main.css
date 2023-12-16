@@ -105,7 +105,8 @@ li > *  {
 }
 
 .loginPageBox {
-  width: 30vw;
+  width: 25vw;
+  min-width: 400px;
   height: 50vh;
   background-color: var(--myColor1);
   display: flex;
@@ -301,7 +302,7 @@ input::placeholder{
 .mainNavbar {
   width: 100%;
   overflow: hidden;
-  height: 8vw;
+  height: 130px;
   display: flex;
   background-color: var(--myColor3);
   justify-content: space-around;
@@ -313,6 +314,7 @@ input::placeholder{
   font-family: 'Whisper', cursive;
   padding: 20px;
   color: var(--myColor1);
+  width: 400px;
 }
 
 .mainNavbar div {
@@ -464,7 +466,7 @@ input::placeholder{
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  max-width: 300px;
+  width: 300px;
   height: 650px;
   border: 2px solid var(--myColor3);
   background-color: var(--myColor1);
@@ -516,7 +518,7 @@ input::placeholder{
   
 }
 
-.addMovie {
+.addRemoveMovie {
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -524,12 +526,10 @@ input::placeholder{
   right: .5rem;
   width: 5rem;
   height: 5rem;
-  color: var(--myColor4);
-  transition: transform .3s;
-  
+  transition: transform .3s; 
 }
 
-.addMovie:hover {
+.addRemoveMovie:hover {
   transform: scale(0.9);
   cursor: pointer;
   
@@ -646,6 +646,25 @@ input::placeholder{
   transition: right 0.5s ease
 }
 
+.addRemovePopUp{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50px;
+  right: 50px;
+  width: 17vw;
+  height: 12vh;
+  border-radius: 5px;
+  background-color: var(--myColor1);
+  text-align: center;
+  color: var(--myColor4);
+  font-size: 1.5rem;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 1);
+  transition: right 0.5s ease;
+  z-index: 555;
+}
+
 
 @keyframes animateBackground {
   0%{
@@ -715,6 +734,10 @@ input::placeholder{
 @media screen and (max-width: 1300px) {
   .movieDetailsInfoContainer span,a {
     font-size: .7rem;
+  }
+  .mainNavbar span {
+    font-size: 1.5rem;
+    
   }
 }
 

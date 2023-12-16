@@ -6,8 +6,15 @@ import { StateMovieSection } from '../interfaces/interface';
 import SingleMovie from './SingleMovie';
 import isEqual from 'lodash/isEqual';
 import axios from 'axios';
+import useMovieActions from '../hooks/useMovieActions';
+
 
 const MoviesList = () => {
+
+  const { handleAddMovie, handleRemoveMovie } = useMovieActions();
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showRemoveMessage, setShowRemoveMessage] = useState(false);
+  
   const [movieData, setMovieData] = useState<MovieData[]>([]);
   const selectedButton = useSelector((state: StateMovieSection) => state.moviesSort.selectedButton);
   const moviesSearch: MovieData[] = useSelector((state: StateMovieSection) => state.moviesSearch.moviesSearchList);
@@ -84,11 +91,24 @@ const MoviesList = () => {
     }
   }, [moviesSearch, prevMoviesSearch]);
 
+  useEffect(() => {
+    console.log("showSuccessMessage w movieslist:", showSuccessMessage);
+  }, [showSuccessMessage]);
+
   return (
     <animated.main className='mainMoviesListContainer' style={props}>
       {currentData.length > 0 ? (
         currentData.map((element) => (
-          <SingleMovie key={element.id} data={element} />
+          <SingleMovie 
+          key={element.id}
+          data={element}
+          showSuccessMessage={showSuccessMessage}
+          showRemoveMessage={showRemoveMessage}
+          handleAddMovie={handleAddMovie}
+          handleRemoveMovie={handleRemoveMovie}
+          setShowSuccessMessage={setShowSuccessMessage}
+          setShowRemoveMessage={setShowRemoveMessage}
+          />
         ))
       ) : (
         <span className='flexColumnCenter'>
@@ -96,6 +116,7 @@ const MoviesList = () => {
           <div>or find something new!</div>
         </span>
       )}
+      
     </animated.main>
   );
 };

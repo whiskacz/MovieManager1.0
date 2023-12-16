@@ -12,7 +12,7 @@ const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState<MovieData | null>(null);
   const [movieId, setMovieId] = useState<string | null>(null);
   const loggedUser = useSelector((state: StateMovieSection) => state.loggedUser.loggedUser)
-  const { handleAddMovie, handleRemoveMovie } = useMovieActions();
+  const { handleAddMovie, handleRemoveMovie, showSuccessMessage, showRemoveMessage } = useMovieActions();
   const location = useLocation();
 
   const {
@@ -21,12 +21,12 @@ const MovieDetails = () => {
       poster_path,
       homepage,
       overview,
-      release_date
+      release_date,
     } = movieDetails || {};
     
 
   useEffect(() => {
-    const managerData = location.pathname.split('manager/')[1]; // Wyodrębnienie danych po "manager/"
+    const managerData = location.pathname.split('manager/')[1];
     setMovieId(managerData);
   }, [location.pathname]);
 
@@ -52,7 +52,7 @@ const MovieDetails = () => {
 
   const handleAddToCollection = async () => {
     if (loggedUser && movieDetails) {
-        handleAddMovie(loggedUser, movieDetails); // Teraz przekazujemy całą odpowiedź filmu
+        handleAddMovie(loggedUser, movieDetails);
     }
 };
 
@@ -70,7 +70,6 @@ const handleRemoveFromCollection = async () => {
         url(https://image.tmdb.org/t/p/original${poster_path})`,
     }}>
       {movieDetails !== null && (
-        <>
         <main className='movieDetailsContainer'>
           <img src={`https://image.tmdb.org/t/p/original${poster_path}`} alt="movie poster" />
           <div className='movieDetailsInfoContainer'>
@@ -97,12 +96,23 @@ const handleRemoveFromCollection = async () => {
             </div>
           </div>
         </main>
-        </>
+        
       )}
       <Link to={'/manager'}>
         <BsXLg className='closeButton'/>
       </Link>
+      {(showSuccessMessage && (
+        <div className='addRemovePopUp'>
+          Movie successfully added
+        </div>
+      )) || (
+        showRemoveMessage && (
+          <div className='addRemovePopUp'>
+            Movie successfully removed
+          </div>
+      ))}
     </div>
+    
   );
 };
 
