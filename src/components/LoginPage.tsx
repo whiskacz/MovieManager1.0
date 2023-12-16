@@ -186,15 +186,15 @@ export const LoginPage = () => {
                 articlePopUp.style.right = '2vw';
                 setTimeout(() => {
                     articlePopUp.style.right = '-102vw';
-                    articlePopUp.textContent = ''; // Usunięcie komunikatu po zakończeniu animacji
-                }, 5000); // Czas trwania animacji w milisekundach (10 sekund)
+                    articlePopUp.textContent = ''; 
+                }, 5000); 
             }
             console.error('Login failed', error);
         }) 
     }
 
   return (
-    <>
+    <main className="mainLoginPageContainer">
         <main className='loginPageWrapper flexColumnCenter'>
             <div className='choiceContainer'>
                 <div className='choiceTitle'>
@@ -342,6 +342,8 @@ export const LoginPage = () => {
         <article className="articlePopUp">
             Access denied
         </article>
-    </>
+    </main>
   )
 }
+
+export default LoginPage

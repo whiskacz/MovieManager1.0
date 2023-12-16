@@ -24,8 +24,17 @@ const MoviesList = () => {
   });
 
   useEffect(() => {
-    if (selectedButton) {
-      const fetchData = async () => {
+    const fetchData = async () => {
+      if (selectedButton === 'private') {
+        try {
+          const response = await axios.get('/movies');
+          const privateMovies = response.data;
+          setCurrentData(privateMovies);
+          setSourceFlag('moviesSearch');
+        } catch (error) {
+          console.error('Error fetching private movies:', error);
+        }
+      } else if (selectedButton) {
         try {
           const apiKey = '179605625a183779c4f6614dbeb3a88c';
           const language = 'pl';
@@ -41,13 +50,13 @@ const MoviesList = () => {
           setMovieData(data);
           console.log('Movie data updated:', data);
         } catch (error) {
-          console.error('Błąd pobierania danych:', error);
+          console.error('Error fetching data:', error);
         }
-      };
+      }
+    };
 
-      console.log('Effect triggered for selectedButton:', selectedButton);
-      fetchData();
-    }
+    console.log('Effect triggered for selectedButton:', selectedButton);
+    fetchData();
   }, [selectedButton]);
 
   useEffect(() => {

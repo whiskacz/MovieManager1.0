@@ -51,3 +51,9 @@ export interface LoggedUserAction {
   type: string;
   payload: LoggedUser;
 }
+
+export interface LoginPageBackgroundProps {
+  left: string;
+  animationDelay: string; 
+  animationDuration: string;
+}

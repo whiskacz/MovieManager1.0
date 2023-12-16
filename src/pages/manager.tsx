@@ -7,9 +7,6 @@ import backgroundImage2 from '../images/img2.jpg';
 import backgroundImage3 from '../images/img3.jpg';
 import backgroundImage4 from '../images/img4.jpg';
 import backgroundImage5 from '../images/img5.jpg';
-import MovieListComponent from '../components/MoviesListComponent';
-
-
 
 const Manager: React.FC = () => {
 
@@ -19,7 +16,7 @@ const Manager: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex(prevIndex => (prevIndex + 1) % backgroundImages.length);
-    }, 20000); // Przełączanie obrazów co 8 sekund
+    }, 20000); 
 
     return () => clearInterval(interval);
   }, [backgroundImages.length]);
@@ -67,7 +64,6 @@ const Manager: React.FC = () => {
         <NavBar />
         <CategoryButtons />
         <MoviesList />
-        <MovieListComponent />
       </main>
     </>
   )

@@ -1,5 +1,3 @@
-// useMovieActions.ts
-
 import axios from 'axios';
 import { MovieData } from '../interfaces/interface';
 
@@ -20,11 +18,11 @@ const useMovieActions = () => {
 
     const handleRemoveMovie = async (user: string, movieData: MovieData) => {
       try {
-          const { id } = movieData; // Pobranie ID z obiektu movieData
+          const { id } = movieData;
           const response = await axios.post("http://localhost:5000/moviesEdit", {
               user,
               action: 'remove',
-              movieData: { id }, // Przekazanie tylko ID
+              movieData: { id }, 
           });
   
           console.log(response.data);
