@@ -1,46 +1,27 @@
-# Getting Started with Create React App
+## Movie Manager 1.0
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Introduction
+The application is an interactive movie manager designed for browsing, searching, and managing a collection of movies. Its main features include login functionality, user account creation, browsing the most popular, top-rated, and upcoming movies from the external TMDB API, as well as creating a personalized movie list for each registered user.
 
-## Available Scripts
+### The application utilizes:
+Frontend: React with TypeScript, employing React Router for managing routes, and Redux for handling the application's state.
+Backend: A server written in Express.js with MongoDB as the database.
 
-In the project directory, you can run:
+### Additional tools: 
+Axios for handling network requests and primarily communicating with the TMDB service API, Lodash for simplifying data operations, mongoose for handling the external database, and Tailwind CSS for partial styling.
 
-### `npm start`
+### Routing Structure Description
+The application uses React Router to manage paths and render appropriate components based on the logged-in user's status.
+BrowserRouter: Utilized to ensure routing within the application.
+Routes and Route: Definitions of routing paths and components associated with these paths.
+Home, Manager, MovieDetails: Components rendered for specific paths.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Security and Error Handling
+Access to the application is restricted to registered users only.
+Field validation (username, password, email) follows strict rules.
+All passwords are encrypted before being stored in the database.
+The application responds to login errors, registration issues, and server errors, providing appropriate messages for users and information in console.log.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Planned Development
+Planned migration of the server to the cloud to ensure continuous application availability without the need to manually start a dedicated server each time.
+Efforts aimed at optimizing performance.
