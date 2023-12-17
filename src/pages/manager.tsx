@@ -11,8 +11,6 @@ import backgroundImage5 from '../images/img5.jpg';
 
 const Manager: React.FC = () => {
 
-  
-
   const [backgroundImages] = useState([backgroundImage1, backgroundImage2, backgroundImage3, backgroundImage4, backgroundImage5 ]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
