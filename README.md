@@ -1,3 +1,5 @@
+## ** @@@ To ensure proper functioning, the application needs to download the 'MovieManager Server' repository to run the server @@@**
+
 ## **Movie Manager 1.0**
 
 ### Introduction
