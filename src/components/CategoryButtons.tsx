@@ -4,17 +4,12 @@ import { useSpring, animated } from 'react-spring';
 import { setButtonSelection } from '../store/moviesSortActions';
 import tmdbLogo from '../images/tmdbLogo.svg';
 
-
-
 const CategoryButtons = () => {
   
-  
   const dispatch = useDispatch();
-
   const handleButtonClick = (buttonName: string) => {
 
     let selectedButton = '' 
-
     if (buttonName === 'now playing') {
       selectedButton = 'now_playing';
     } else if (buttonName === 'private') {
@@ -28,13 +23,10 @@ const CategoryButtons = () => {
     } else {
       selectedButton = buttonName;
     }
-
-
     dispatch(setButtonSelection(selectedButton));
     console.log('Button clicked!', selectedButton); 
   };
 
- 
   const props = useSpring({
       opacity: 1,
       transform: 'translateX(0)',
@@ -49,6 +41,7 @@ const CategoryButtons = () => {
       'top rated',
       'upcoming'
   ]
+  
   return (
     <animated.div className='mainCategoryButtons' style={props}>
         <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer">

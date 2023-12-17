@@ -21,7 +21,6 @@ export interface MovieData {
     release_date: string;
 
 }
-
 export interface StateMovieSection {
     moviesSort: {
       selectedButton: string;
@@ -33,16 +32,13 @@ export interface StateMovieSection {
       loggedUser:string
     }
 }
-
 export interface MoviesSortState {
   selectedButton: string;
 }
-
 export interface Action {
   type: string;
   payload: string;
 }
-
 export interface LoggedUser {
   username: string;
 }
@@ -56,4 +52,14 @@ export interface LoginPageBackgroundProps {
   left: string;
   animationDelay: string; 
   animationDuration: string;
+}
+
+export interface SingleMovieProps {
+  data: MovieData;
+  showSuccessMessage: boolean;
+  showRemoveMessage: boolean;
+  handleAddMovie: (user: string, movieData: MovieData) => void;
+  handleRemoveMovie: (user: string, movieData: MovieData) => void;
+  setShowSuccessMessage: (value: boolean) => void;
+  setShowRemoveMessage: (value: boolean) => void;
 }

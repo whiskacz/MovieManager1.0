@@ -39,7 +39,6 @@ const Manager: React.FC = () => {
         const randomOriginX = Math.random() * 100;
         const randomOriginY = Math.random() * 100;
         const randomScale = 1 + Math.random();
-
         elements[i].style.transformOrigin = `${randomOriginX}% ${randomOriginY}%`;
         elements[i].style.animationDuration = `${10 + Math.random() * 20}s`;
         elements[i].style.transform = `scale(${randomScale})`;
@@ -50,7 +49,6 @@ const Manager: React.FC = () => {
   }, []);
   
   return (
-    <>
       <main className='mainManagerContainer'>
         <div className="backgroundComponent">
           {backgroundImages.map((image, index) => (
@@ -66,7 +64,6 @@ const Manager: React.FC = () => {
         <CategoryButtons />
         <MoviesList />
       </main>
-    </>
   )
 }
 export default Manager

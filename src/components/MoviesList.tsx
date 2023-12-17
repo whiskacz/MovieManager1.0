@@ -8,7 +8,6 @@ import isEqual from 'lodash/isEqual';
 import axios from 'axios';
 import useMovieActions from '../hooks/useMovieActions';
 
-
 const MoviesList = () => {
 
   const { handleAddMovie, handleRemoveMovie } = useMovieActions();
@@ -46,7 +45,6 @@ const MoviesList = () => {
           const apiKey = '179605625a183779c4f6614dbeb3a88c';
           const language = 'pl';
           const apiUrl = `https://api.themoviedb.org/3/movie/${selectedButton}?language=pl&page=1`;
-
           const response = await axios.get(apiUrl, {
             params: {
               api_key: apiKey,
@@ -115,8 +113,7 @@ const MoviesList = () => {
           <div>Choose your list</div>
           <div>or find something new!</div>
         </span>
-      )}
-      
+      )}  
     </animated.main>
   );
 };

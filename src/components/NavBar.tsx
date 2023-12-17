@@ -61,9 +61,10 @@ const NavBar: React.FC = () => {
       setSearchValue('')
       }
     }, [fetchData,searchPush,handleEnterPress]);
+    
     console.log(`loggedUser: ${loggedUser}`)
+
   return (
-    <>
     <animated.main className='mainNavbar' style={props}>
         <span>Movie Manager 1.0</span>
         <div className='filmInputSearchBar moduls'>
@@ -83,7 +84,6 @@ const NavBar: React.FC = () => {
             <TbLogout onClick={handleLogout} title='LOGOUT'/>
         </div>
     </animated.main>
-    </>
   )
 }
 export default NavBar

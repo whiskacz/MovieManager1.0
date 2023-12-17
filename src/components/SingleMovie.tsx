@@ -1,20 +1,10 @@
 import { useEffect } from 'react';
-import { MovieData } from "../interfaces/interface";
+import { SingleMovieProps } from "../interfaces/interface";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { PiMinusCircleFill } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import { StateMovieSection } from "../interfaces/interface";
 import { useSelector } from "react-redux";
-
-interface SingleMovieProps {
-    data: MovieData;
-    showSuccessMessage: boolean;
-    showRemoveMessage: boolean;
-    handleAddMovie: (user: string, movieData: MovieData) => void;
-    handleRemoveMovie: (user: string, movieData: MovieData) => void;
-    setShowSuccessMessage: (value: boolean) => void;
-    setShowRemoveMessage: (value: boolean) => void;
-}
 
 const SingleMovie: React.FC<SingleMovieProps> = ({ 
     data, 

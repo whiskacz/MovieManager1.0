@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { setUserName } from "../store/loggedUserActions";
 import { BsFillArrowUpLeftCircleFill, BsCheckCircleFill, BsXCircleFill } from "react-icons/bs";
 import { MdEmail, MdLockOutline, MdAccountCircle } from "react-icons/md";
-import axios from "axios";
+import axios from "axios"; // @ts-ignore
 
 
 export const LoginPage = () => {
@@ -73,8 +73,7 @@ export const LoginPage = () => {
     const EMAIL_REGEX = useMemo(() => {
         return /^[A-Za-z\d]+@[A-Za-z\d]{2,}\.[A-Za-z\d]{2,}$/
     },[]) 
-    
-    
+     
     position === "sign" ?  iconPosition = -40 : iconPosition = 180
     const handleTogglePosition = () => {
         const newPosition: string = position === 'sign' ? 'register' : 'sign';
@@ -345,5 +344,4 @@ export const LoginPage = () => {
     </main>
   )
 }
-
 export default LoginPage

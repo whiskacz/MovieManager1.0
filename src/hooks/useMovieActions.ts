@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { MovieData } from '../interfaces/interface';
+import axios from 'axios';
 
 const useMovieActions = () => {
 

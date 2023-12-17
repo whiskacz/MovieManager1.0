@@ -5,7 +5,7 @@ const config = {
       popular: `https://api.themoviedb.org/3/movie/popular`
     },
     apiKey: '179605625a183779c4f6614dbeb3a88c',
-    language: 'pl'
+    language: 'us'
   };
   
   export const BASE_NAME ='/react-themoviedb';

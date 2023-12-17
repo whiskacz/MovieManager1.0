@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { MovieData } from '../interfaces/interface'; // Zaimportuj swoje interfejsy
+import { MovieData } from '../interfaces/interface';
 
 const MovieListComponent: React.FC = () => {
   const [movies, setMovies] = useState<MovieData[]>([]);
@@ -8,7 +8,7 @@ const MovieListComponent: React.FC = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/movies'); // Zmień URL na odpowiedni endpoint
+        const response = await axios.get('http://localhost:5000/movies'); 
         setMovies(response.data);
       } catch (error) {
         console.error('Błąd pobierania filmów:', error);
@@ -25,7 +25,6 @@ const MovieListComponent: React.FC = () => {
         {movies.map((movie) => (
           <li key={movie.id}>
             <p>Title: {movie.title}</p>
-            {/* Dodaj tutaj inne informacje o filmie */}
           </li>
         ))}
       </ul>

@@ -24,7 +24,6 @@ const MovieDetails = () => {
       release_date,
     } = movieDetails || {};
     
-
   useEffect(() => {
     const managerData = location.pathname.split('manager/')[1];
     setMovieId(managerData);
@@ -58,7 +57,7 @@ const MovieDetails = () => {
 
 const handleRemoveFromCollection = async () => {
     if (loggedUser && movieDetails) {
-        handleRemoveMovie(loggedUser, movieDetails); // I tutaj również
+        handleRemoveMovie(loggedUser, movieDetails); 
     }
 };
 
